@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Van Bazaar | Voice-First Fair Price Platform for Tribal Forest-Produce</title>
+  <meta name="description" content="Van Bazaar empowers tribal women forest-produce collectors with transparent MSP pricing, collective selling aggregation, voice-first accessibility, and grievance accountability in Jharkhand and across India.">
+  <meta name="keywords" content="Van Bazaar, Tribal Forest Economy, MSP Fair Price, Mahua, Lac, Van Kendra, Women Empowerment, TRIFED, Jharkhand, Voice-First AI">
+  <meta name="author" content="Van Bazaar Team">
+  <meta name="theme-color" content="#0B6B2E">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Van Bazaar - From Tribal Wisdom to Tribal Wealth">
+  <meta property="og:description" content="Voice-First Fair Price Platform empowering tribal forest-produce collectors.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon Leaf SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B6B2E'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12c0 3.5 1.8 6.6 4.6 8.4L12 22l5.4-1.6C20.2 18.6 22 15.5 22 12c0-5.5-4.5-10-10-10zm0 17.5l-4-1.2C5.8 17 4.5 14.6 4.5 12c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5c0 2.6-1.3 5-3.5 6.3l-4 1.2z'/%3E%3Cpath d='M12 6c-3.3 0-6 2.7-6 6 0 2.2 1.2 4.1 3 5.1V12h6v5.1c1.8-1 3-2.9 3-5.1 0-3.3-2.7-6-6-6z'/%3E%3C/svg%3E">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=20260901_4">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. Sticky Navigation
+       ========================================================================== -->
+  <header class="navbar-wrapper" id="navbarWrapper">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <!-- Logo Left -->
+        <a href="#home" class="brand-logo" id="brandLogo">
+          <div class="brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">VAN BAZAAR</span>
+            <span class="brand-tag">वन बाज़ार • Tribal Wealth</span>
+          </div>
+        </a>
+
+        <!-- Menu Links -->
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link active" id="navLinkHome">Home</a></li>
+          <li><a href="#prices" class="nav-link" id="navLinkPrices">Prices</a></li>
+          <li><a href="#services" class="nav-link" id="navLinkServices">Sell Together</a></li>
+          <li><a href="#impact" class="nav-link" id="navLinkImpact">Impact</a></li>
+          <li><a href="#contact" class="nav-link" id="navLinkContact">Contact</a></li>
+        </ul>
+
+        <!-- Right Action Buttons -->
+        <div class="nav-actions">
+          <button class="btn btn-leader btn-sm" id="btnLeaderAccess" aria-label="Open Leader Access Dashboard">
+            <span>👑 Leader Access</span>
+          </button>
+
+          <button class="btn btn-outline btn-sm" id="btnLangSelect" aria-label="Select Local Language">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="currentLangLabel">Local Language</span>
+          </button>
+
+          <button class="btn btn-primary btn-sm" id="btnLogin" aria-label="Login to Platform">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+              <polyline points="10 17 15 12 10 7"/>
+              <line x1="15" y1="12" x2="3" y2="12"/>
+            </svg>
+            <span>Login</span>
+          </button>
+
+          <!-- Logged-in User Profile Dropdown Pill -->
+          <div class="user-profile-menu-wrap" id="userProfileMenuWrap" style="display: none;">
+            <button type="button" class="user-profile-btn" id="btnUserMenuToggle" aria-label="User Account Dashboard">
+              <div class="user-avatar-sm" id="userAvatarNav">SM</div>
+              <div class="user-info-nav">
+                <span class="user-name-nav" id="userNameNav">Sunita Munda</span>
+                <span class="user-role-nav" id="userRoleNav">SHG Collector</span>
+              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. Hero Section
+       ========================================================================== -->
+  <section class="section hero-section" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- Hero Left Column -->
+        <div class="hero-left fade-up">
+          <h1 class="hero-heading">
+            <span class="brand-hi">वन</span> BAZAAR
+          </h1>
+          <h2 class="hero-subheading" id="heroSubtitle">
+            From Tribal Wisdom to Tribal Wealth
+          </h2>
+          <p class="hero-description" id="heroDesc">
+            Voice-first fair price platform helping tribal women know today's MSP price, sell collectively and earn better income.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="hero-cta-group">
+            <a href="#prices" class="btn btn-primary btn-lg" id="btnHeroGetStarted">
+              <span>Get Started</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+
+            <button class="btn btn-voice btn-lg" id="btnHeroListenVoice">
+              <span>🎤 Listen in Local Language</span>
+            </button>
+          </div>
+
+          <!-- Feature Badges -->
+          <div class="hero-badges">
+            <div class="feature-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Tribal Forest Economy</span>
+            </div>
+            <div class="feature-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              <span>AI & Digital Inclusion</span>
+            </div>
+            <div class="feature-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              <span>Women-led Enterprises</span>
+            </div>
+          </div>
+
+          <!-- Bottom Location Indicator -->
+          <div class="hero-location">
+            <span>📍 Pilot Region: Khunti & West Singhbhum, Jharkhand</span>
+          </div>
+        </div>
+
+        <!-- Hero Right Column -->
+        <div class="hero-right fade-up">
+          <div class="hero-image-wrapper">
+            <img src="assets/images/hero-tribal-woman.jpg" alt="Smiling tribal woman collector holding Mahua and Lac forest produce basket in Jharkhand forest" class="hero-main-img">
+            
+            <!-- Floating Card 1: Today's MSP -->
+            <div class="floating-card card-pos-1">
+              <div class="fc-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <div class="fc-content">
+                <h4>Today's MSP</h4>
+                <p>₹35 / KG <span style="color: #15803D; font-size: 0.8rem;">(+25%)</span></p>
+              </div>
+            </div>
+
+            <!-- Floating Card 2: Voice Enabled -->
+            <div class="floating-card card-pos-2">
+              <div class="fc-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </div>
+              <div class="fc-content">
+                <h4>Voice Enabled</h4>
+                <p>Hindi & Santhali</p>
+              </div>
+            </div>
+
+            <!-- Floating Card 3: Women Led -->
+            <div class="floating-card card-pos-3">
+              <div class="fc-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </div>
+              <div class="fc-content">
+                <h4>Women Led</h4>
+                <p>500+ SHG Members</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. Live MSP Price Dashboard
+       ========================================================================== -->
+  <section class="section msp-section" id="prices">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Direct From TRIFED & Van Dhan Kendras</span>
+        <h2 class="section-title" id="mspSectionTitle">Today's Fair Market Prices</h2>
+        <p class="section-subtitle">Real-time minimum support prices guaranteed by Van Dhan Vikas Kendras. Eliminating middlemen exploitation.</p>
+      </div>
+
+      <!-- Microphone Search Bar -->
+      <div class="voice-search-bar-wrapper fade-up">
+        <div class="voice-search-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-light); margin-left: 4px;">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" class="search-input-field" id="searchInput" placeholder='Ask: "Aaj Mahua ka daam kya hai?"' aria-label="Search forest produce prices or ask via voice">
+          <button class="pulse-mic-btn" id="btnMainVoiceSearch" title="Click to Speak or Ask Price" aria-label="Voice Search Assistant">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="msp-filter-tabs fade-up">
+        <button class="filter-pill active" data-category="all">All Produce (6)</button>
+        <button class="filter-pill" data-category="ntfp">Non-Timber Produce</button>
+        <button class="filter-pill" data-category="resins">Resins & Gums</button>
+        <button class="filter-pill" data-category="medicinal">Medicinal & Food</button>
+        <button class="filter-pill" data-category="seeds">Seeds & Oil</button>
+      </div>
+
+      <!-- 6 Live Product Cards Grid (Injected via JS for full interactive reactivity) -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Javascript dynamically renders the 6 cards with audio buttons and trend indicators -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. Three Core Services & Sell Together Hub
+       ========================================================================== -->
+  <section class="section services-section" id="services">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Core Value Pillars</span>
+        <h2 class="section-title">Built For Tribal Collectors</h2>
+        <p class="section-subtitle">Three integrated tools solving the critical bottlenecks of asymmetric pricing, small volumes, and corrupt weighing scales.</p>
+      </div>
+
+      <div class="services-grid">
+        
+        <!-- Card 1: Know the Price -->
+        <div class="service-card fade-up">
+          <div class="service-icon-box icon-box-1">
+            <!-- Rupee Icon -->
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3h12"/>
+              <path d="M6 8h12"/>
+              <path d="M6 13l8.5 8"/>
+              <path d="M6 13h3a5 5 0 0 0 5-5 5 5 0 0 0-5-5"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Know the Price</h3>
+          <p class="service-desc">Get daily MSP and real market rates in your local language. No literacy needed—just ask your phone or listen via voice.</p>
+          <a href="#prices" class="service-action-link" id="linkCheckMsp">
+            <span>Check Rates Now</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 2: Sell Together -->
+        <div class="service-card fade-up">
+          <div class="service-icon-box icon-box-2">
+            <!-- People / Group Icon -->
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Sell Together</h3>
+          <p class="service-desc">5+ collectors can aggregate products for better bargaining power, bulk transportation support, and higher volume bonuses.</p>
+          <a href="#sellTogetherHub" class="service-action-link">
+            <span>Join or Create Group Below</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 3: Get Accountability -->
+        <div class="service-card fade-up">
+          <div class="service-icon-box icon-box-3">
+            <!-- Shield / Protection Icon -->
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Get Accountability</h3>
+          <p class="service-desc">Report underpayment, wrong weighing or closed Kendras using voice. Direct escalation to TRIFED district officers within 24 hours.</p>
+          <button class="service-action-link" id="btnOpenGrievance" style="background:none; border:none; cursor:pointer;">
+            <span>File Voice Grievance</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ====================================================================
+           Dedicated "Sell Together" Aggregation Hub (Form + Live Board)
+           ==================================================================== -->
+      <div class="sell-together-hub fade-up" id="sellTogetherHub">
+        
+        <div class="hub-header">
+          <span class="section-tag" style="background: #FEF3C7; color: #D97706; border-color: rgba(217,119,6,0.25);">
+            🤝 Community Produce Matchmaking
+          </span>
+          <h3>Sell Together Aggregation Hub (सामूहिक बिक्री केंद्र)</h3>
+          <p>
+            Enter your name and mobile number, select the forest produce you have collected, and state the quantity. Your listing will appear live so nearby women collectors and SHGs can contact you, combine batches, and unlock maximum Van Kendra volume bonuses!
+          </p>
+        </div>
+
+        <div class="hub-grid">
+          
+          <!-- Column 1: Registration Form Box -->
+          <div class="hub-form-card">
+            <div class="form-header-bar">
+              <h4>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                <span>Add Your Produce to Sell Together</span>
+              </h4>
+              <span class="form-badge-live">Live Instant Sync</span>
+            </div>
+
+            <form id="sellTogetherForm">
+              
+              <!-- Name & Mobile Number -->
+              <div class="form-row-2">
+                <div class="form-group-item">
+                  <label for="collectorName">Collector / SHG Leader Name *</label>
+                  <input type="text" class="form-input-control" id="collectorName" placeholder="e.g. Mangli Kui / Sunita Munda" required>
+                </div>
+                <div class="form-group-item">
+                  <label for="collectorPhone">Mobile Number (फॉर संपर्क) *</label>
+                  <input type="tel" class="form-input-control" id="collectorPhone" placeholder="e.g. 9431X XXXXX" pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+              </div>
+
+              <!-- Location / Nearest Van Kendra & SHG Group -->
+              <div class="form-row-2">
+                <div class="form-group-item">
+                  <label for="collectorLocation">Village / Nearest Van Kendra *</label>
+                  <select class="form-input-control" id="collectorLocation" required>
+                    <option value="Torpa Van Kendra (Khunti)">Torpa Van Kendra (तोरपा, खूंटी)</option>
+                    <option value="Murhu Mahila Samuh Kendra (Khunti)">Murhu Kendra (मुरहू, खूंटी)</option>
+                    <option value="Chakradharpur Forest Hub (West Singhbhum)">Chakradharpur (चक्रधरपुर, प. सिंहभूम)</option>
+                    <option value="Goilkera Tribal Producer Kendra (West Singhbhum)">Goilkera Kendra (गोइलकेरा, प. सिंहभूम)</option>
+                    <option value="Manoharpur Tribal Cluster">Manoharpur Cluster (मनोहरपुर)</option>
+                    <option value="Karra Block Kendra (Khunti)">Karra Block (कर्रा, खूंटी)</option>
+                  </select>
+                </div>
+                <div class="form-group-item">
+                  <label for="collectorShg">SHG / Mahila Mandal Name (Optional)</label>
+                  <input type="text" class="form-input-control" id="collectorShg" placeholder="e.g. Birsa Mahila Samuh">
+                </div>
+              </div>
+
+              <!-- Product Selection via Checkbox + Manual Quantity (KG) -->
+              <div class="produce-select-box">
+                <div class="produce-select-title">
+                  <span>Select Produce & Enter Quantity (KG):</span>
+                  <span style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">(Choose all that apply)</span>
+                </div>
+
+                <div class="checkbox-items-list">
+                  
+                  <!-- Mahua Checkbox -->
+                  <div class="produce-check-row" id="row-mahua">
+                    <label class="check-label-left">
+                      <input type="checkbox" class="produce-chk" data-prod="mahua" data-name="Mahua Flowers" data-msp="35" checked>
+                      <span>महुआ फूल (Mahua Flowers)</span>
+                    </label>
+                    <div class="qty-input-wrap">
+                      <input type="number" class="qty-input-field" id="qty-mahua" value="50" min="5" max="5000" placeholder="Qty">
+                      <span class="qty-unit-tag">KG</span>
+                    </div>
+                  </div>
+
+                  <!-- Kusmi Lac Checkbox -->
+                  <div class="produce-check-row" id="row-lac">
+                    <label class="check-label-left">
+                      <input type="checkbox" class="produce-chk" data-prod="lac" data-name="Kusmi Lac (लाह)" data-msp="320">
+                      <span>कुसमी लाह (Kusmi Lac)</span>
+                    </label>
+                    <div class="qty-input-wrap">
+                      <input type="number" class="qty-input-field" id="qty-lac" value="20" min="1" max="1000" placeholder="Qty" disabled>
+                      <span class="qty-unit-tag">KG</span>
+                    </div>
+                  </div>
+
+                  <!-- Wild Tamarind Checkbox -->
+                  <div class="produce-check-row" id="row-tamarind">
+                    <label class="check-label-left">
+                      <input type="checkbox" class="produce-chk" data-prod="tamarind" data-name="Wild Tamarind" data-msp="36">
+                      <span>जंगली इमली (Wild Tamarind)</span>
+                    </label>
+                    <div class="qty-input-wrap">
+                      <input type="number" class="qty-input-field" id="qty-tamarind" value="40" min="5" max="2000" placeholder="Qty" disabled>
+                      <span class="qty-unit-tag">KG</span>
+                    </div>
+                  </div>
+
+                  <!-- Sal Seeds Checkbox -->
+                  <div class="produce-check-row" id="row-sal-seed">
+                    <label class="check-label-left">
+                      <input type="checkbox" class="produce-chk" data-prod="sal-seed" data-name="Sal Seeds" data-msp="22">
+                      <span>साल / सखुआ बीज (Sal Seeds)</span>
+                    </label>
+                    <div class="qty-input-wrap">
+                      <input type="number" class="qty-input-field" id="qty-sal-seed" value="100" min="10" max="10000" placeholder="Qty" disabled>
+                      <span class="qty-unit-tag">KG</span>
+                    </div>
+                  </div>
+
+                  <!-- Forest Honey Checkbox -->
+                  <div class="produce-check-row" id="row-honey">
+                    <label class="check-label-left">
+                      <input type="checkbox" class="produce-chk" data-prod="honey" data-name="Wild Forest Honey" data-msp="225">
+                      <span>जंगली शहद (Forest Honey)</span>
+                    </label>
+                    <div class="qty-input-wrap">
+                      <input type="number" class="qty-input-field" id="qty-honey" value="15" min="1" max="500" placeholder="Qty" disabled>
+                      <span class="qty-unit-tag">KG</span>
+                    </div>
+                  </div>
+
+                  <!-- Harra Fruit Checkbox -->
+                  <div class="produce-check-row" id="row-harra">
+                    <label class="check-label-left">
+                      <input type="checkbox" class="produce-chk" data-prod="harra" data-name="Harra / Haritaki" data-msp="18">
+                      <span>हर्रा / हरीतकी (Harra Fruit)</span>
+                    </label>
+                    <div class="qty-input-wrap">
+                      <input type="number" class="qty-input-field" id="qty-harra" value="30" min="5" max="3000" placeholder="Qty" disabled>
+                      <span class="qty-unit-tag">KG</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Form Live Estimate -->
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(11,107,46,0.2); font-size: 0.88rem;">
+                  <span>Total Batch Weight: <strong id="formTotalWeight" style="color: var(--dark-green);">50 KG</strong></span>
+                  <span>Est. MSP Value: <strong id="formTotalVal" style="color: var(--primary);">₹1,750</strong></span>
+                </div>
+              </div>
+
+              <!-- Form Buttons -->
+              <div class="hub-form-actions">
+                <button type="submit" class="btn btn-primary btn-lg" style="flex: 1;">
+                  <span>🚀 Post Collective Listing</span>
+                </button>
+                <button type="button" class="btn btn-outline" id="btnOpenCalculatorFromHub">
+                  <span>🧮 Profit Calc</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Column 2: Public Open Listings Board -->
+          <div class="hub-listings-card">
+            <div class="listings-header">
+              <h4>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #D97706;">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span>Active Collector Groups (खुली टोलियां)</span>
+              </h4>
+              <span id="activeGroupsCountBadge" style="background: var(--light-green); color: var(--primary); font-size: 0.8rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 999px;">
+                3 Active Groups
+              </span>
+            </div>
+
+            <!-- Search / Filter for Listings -->
+            <div style="margin-bottom: 1rem;">
+              <input type="text" class="form-input-control" id="searchListingsInput" placeholder="🔍 Search groups by name, produce, or village...">
+            </div>
+
+            <!-- Scrollable Listings Container -->
+            <div class="listings-scroll-container" id="collectiveListingsContainer">
+              <!-- Dynamically populated via JS -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       5. How It Works (Horizontal Timeline)
+       ========================================================================== -->
+  <section class="section timeline-section" id="how-it-works">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Seamless Supply Chain</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">From sustainable forest harvesting to direct digital bank transfer in six transparent steps.</p>
+      </div>
+
+      <div class="timeline-wrapper fade-up">
+        <div class="timeline-track">
+          <div class="timeline-progress-line"></div>
+        </div>
+
+        <div class="timeline-steps">
+          
+          <!-- Step 1 -->
+          <div class="timeline-step-item">
+            <div class="timeline-node" title="Step 1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a9 9 0 0 1 9 9c0 4.97-4.03 9-9 9A9 9 0 0 1 3 11a9 9 0 0 1 9-9z"/>
+                <path d="M12 7v5l3 3"/>
+              </svg>
+            </div>
+            <span class="timeline-step-num">Step 01</span>
+            <h4 class="timeline-step-title">Forest Collection</h4>
+            <p class="timeline-step-desc">Sustainable harvesting by local tribal women SHGs.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-step-item">
+            <div class="timeline-node" title="Step 2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <span class="timeline-step-num">Step 02</span>
+            <h4 class="timeline-step-title">Van Kendra Aggregation</h4>
+            <p class="timeline-step-desc">Collective deposit at the nearest village center.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-step-item">
+            <div class="timeline-node" title="Step 3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 14 14"/>
+                <path d="M8 12h8"/>
+              </svg>
+            </div>
+            <span class="timeline-step-num">Step 03</span>
+            <h4 class="timeline-step-title">Quality Check</h4>
+            <p class="timeline-step-desc">Digital moisture & purity grading with photo verify.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="timeline-step-item">
+            <div class="timeline-node" title="Step 4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <line x1="12" y1="8" x2="12" y2="16"/>
+                <line x1="8" y1="12" x2="16" y2="12"/>
+              </svg>
+            </div>
+            <span class="timeline-step-num">Step 04</span>
+            <h4 class="timeline-step-title">Transparent Pricing</h4>
+            <p class="timeline-step-desc">Automated weighment tied directly to published MSP.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="timeline-step-item">
+            <div class="timeline-node" title="Step 5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+            </div>
+            <span class="timeline-step-num">Step 05</span>
+            <h4 class="timeline-step-title">Market Linkage</h4>
+            <p class="timeline-step-desc">Direct supply to buyers, pharma labs & export hubs.</p>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="timeline-step-item">
+            <div class="timeline-node" title="Step 6">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <span class="timeline-step-num">Step 06</span>
+            <h4 class="timeline-step-title">Better Income</h4>
+            <p class="timeline-step-desc">Instant direct DBT transfer into women's bank accounts.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. Women-led Business Model
+       ========================================================================== -->
+  <section class="section women-model-section" id="women-model">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Institutional Transformation</span>
+        <h2 class="section-title">Women-Led Enterprise Model</h2>
+        <p class="section-subtitle">Putting technological ownership and financial leadership directly into the hands of tribal women.</p>
+      </div>
+
+      <div class="women-grid">
+        
+        <!-- Left Side: Visual -->
+        <div class="women-img-container fade-up">
+          <img src="assets/images/women-enterprise.jpg" alt="Tribal women in Jharkhand reviewing digital pricing and produce records using smartphone" class="women-main-img">
+        </div>
+
+        <!-- Right Side: 5 Vertical Feature Cards -->
+        <div class="women-feature-list fade-up">
+          
+          <div class="feature-pill-card">
+            <div class="pill-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="pill-card-content">
+              <h4>Women at the Core</h4>
+              <p>100% of village aggregation centers are operated by local tribal Mahila Mandals and SHG leaders.</p>
+            </div>
+          </div>
+
+          <div class="feature-pill-card">
+            <div class="pill-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+            </div>
+            <div class="pill-card-content">
+              <h4>Decision Making</h4>
+              <p>Community price committees set aggregation schedules and negotiate corporate off-taker contracts.</p>
+            </div>
+          </div>
+
+          <div class="feature-pill-card">
+            <div class="pill-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+              </svg>
+            </div>
+            <div class="pill-card-content">
+              <h4>Income in Women's Hands</h4>
+              <p>Direct Aadhaar-enabled bank payouts ensure funds reach women directly, fueling health and schooling.</p>
+            </div>
+          </div>
+
+          <div class="feature-pill-card">
+            <div class="pill-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <div class="pill-card-content">
+              <h4>Capacity Building</h4>
+              <p>Hands-on training in digital weighing, solar drying, grading, and organic certifications.</p>
+            </div>
+          </div>
+
+          <div class="feature-pill-card">
+            <div class="pill-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <div class="pill-card-content">
+              <h4>Ownership & Dignity</h4>
+              <p>Transforming seasonal gatherers into respected rural co-owners and environmental forest stewards.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Highlighted Quote Banner -->
+      <div class="quote-banner fade-up">
+        <p class="quote-text">
+          "Van Bazaar doesn't build a platform for women. It builds an enterprise around women."
+        </p>
+        <p class="quote-author">— Van Dhan Tribal Empowerment Initiative</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       7. Impact Section
+       ========================================================================== -->
+  <section class="section impact-section" id="impact">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Ground Results</span>
+        <h2 class="section-title">Creating Measurable Impact</h2>
+        <p class="section-subtitle">Real metrics from pilot deployments across Khunti and West Singhbhum forest corridors.</p>
+      </div>
+
+      <!-- 4 Animated Stats -->
+      <div class="stats-grid fade-up">
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="stat-number" data-target="500" data-suffix="+">0</div>
+          <div class="stat-label">Women Empowered</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="stat-number" data-target="25" data-suffix="+">0</div>
+          <div class="stat-label">Van Kendras Connected</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            </svg>
+          </div>
+          <div class="stat-number" data-target="100" data-suffix="+">0</div>
+          <div class="stat-label">Forest Products Tracked</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+              <polyline points="17 6 23 6 23 12"/>
+            </svg>
+          </div>
+          <div class="stat-number" data-target="38" data-suffix="%" data-prefix="+">0</div>
+          <div class="stat-label">Income Increase (30–40%)</div>
+        </div>
+
+      </div>
+
+      <!-- Scalability Roadmap with 4 steps -->
+      <div class="roadmap-box fade-up">
+        <div class="roadmap-header">
+          <h3>Scalability & Expansion Roadmap</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">From pilot blocks to nationwide Van Dhan ecosystem coverage</p>
+        </div>
+
+        <div class="roadmap-grid">
+          
+          <div class="roadmap-step">
+            <span class="roadmap-step-badge">Phase 1 (Current)</span>
+            <h4>Expand Locally</h4>
+            <p>Deploy voice kiosks in 25 pilot Van Kendras across Khunti, Torpa, and Murhu blocks in Jharkhand.</p>
+          </div>
+
+          <div class="roadmap-step">
+            <span class="roadmap-step-badge">Phase 2 (Q4 2026)</span>
+            <h4>Scale Across Districts</h4>
+            <p>Integrate 24 districts across Jharkhand, Odisha, and Chhattisgarh reaching 50,000+ collectors.</p>
+          </div>
+
+          <div class="roadmap-step">
+            <span class="roadmap-step-badge">Phase 3 (2027)</span>
+            <h4>Build Partnerships</h4>
+            <p>Direct B2B supply contracts with leading Ayurvedic manufacturers, organic retailers, and TRIFED export desks.</p>
+          </div>
+
+          <div class="roadmap-step">
+            <span class="roadmap-step-badge">Phase 4 (2028)</span>
+            <h4>Go National</h4>
+            <p>Pan-India rollout supporting 30+ tribal dialects and connecting 5,000+ Van Dhan Vikas Kendra Clusters.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       8. Technology & Innovation
+       ========================================================================== -->
+  <section class="section tech-section" id="technology">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Digital Inclusivity</span>
+        <h2 class="section-title">Technology & Innovation</h2>
+        <p class="section-subtitle">Cutting-edge voice AI and decentralized pricing engines engineered specifically for low-connectivity forest villages.</p>
+      </div>
+
+      <div class="tech-grid">
+        
+        <div class="tech-card fade-up">
+          <div class="tech-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </div>
+          <h3 class="tech-title">Mobile & Offline App</h3>
+          <p class="tech-desc">Ultra-light progressive web app that stores daily MSP cache locally and operates reliably even in 2G/zero signal zones.</p>
+        </div>
+
+        <div class="tech-card fade-up">
+          <div class="tech-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3 class="tech-title">Transparent Pricing Engine</h3>
+          <p class="tech-desc">Algorithmic parity engine cross-referencing daily mandi rates, export demand, and government MSP guarantees.</p>
+        </div>
+
+        <div class="tech-card fade-up">
+          <div class="tech-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+          <h3 class="tech-title">Data & Insights</h3>
+          <p class="tech-desc">Predictive harvest calendars and real-time yield analytics helping district forest officers forecast regional production.</p>
+        </div>
+
+        <div class="tech-card fade-up">
+          <div class="tech-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </div>
+          <h3 class="tech-title">Strong SHG Networks</h3>
+          <p class="tech-desc">Seamless integration with existing National Rural Livelihoods Mission (NRLM) self-help groups and Gram Sabhas.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       9. Vision Section (Split Layout with Abstract Leaf Background)
+       ========================================================================== -->
+  <section class="section vision-section" id="vision">
+    <!-- Abstract Leaf SVG Background -->
+    <svg class="vision-leaf-bg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 10C50 10 10 50 10 100c0 30 15 60 40 75L100 190l50-15c25-15 40-45 40-75 0-50-40-90-90-90z" stroke="currentColor" stroke-width="4"/>
+      <path d="M100 20v160M100 60l50 30M100 100l-50 30M100 140l50 20" stroke="currentColor" stroke-width="3"/>
+    </svg>
+
+    <div class="container">
+      <div class="vision-grid">
+        
+        <!-- Vision Left -->
+        <div class="vision-left fade-up">
+          <span class="section-tag vision-tag">Long-Term Impact</span>
+          <h2>Our Vision</h2>
+          <p class="vision-lead">
+            We envision an India where ancient tribal knowledge and cutting-edge digital intelligence thrive together in complete harmony.
+          </p>
+          <p class="vision-text">
+            By turning forest gatherers into equity-holding micro-entrepreneurs, Van Bazaar is creating self-sustaining green economies that protect our natural biodiversity while providing generational wealth to forest dwelling families.
+          </p>
+          <div style="display: flex; gap: 1rem;">
+            <a href="#services" class="btn btn-accent btn-lg">Explore Collective Selling</a>
+          </div>
+        </div>
+
+        <!-- Vision Right: 4 Vision Cards -->
+        <div class="vision-cards-grid fade-up">
+          
+          <div class="vision-card">
+            <div class="vc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a9 9 0 0 1 9 9c0 4.97-4.03 9-9 9A9 9 0 0 1 3 11a9 9 0 0 1 9-9z"/>
+                <path d="M12 7v5l3 3"/>
+              </svg>
+            </div>
+            <h4>Thriving Forests</h4>
+            <p>Sustainable non-destructive harvesting practices preserving Sal & Mahua ecosystems.</p>
+          </div>
+
+          <div class="vision-card">
+            <div class="vc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h4>Empowered Women</h4>
+            <p>Direct financial inclusion giving women economic sovereignty and community status.</p>
+          </div>
+
+          <div class="vision-card">
+            <div class="vc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+            </div>
+            <h4>Strong Communities</h4>
+            <p>Gram Sabhas equipped with digital bargaining tools against predatory intermediaries.</p>
+          </div>
+
+          <div class="vision-card">
+            <div class="vc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h4>Nationwide Impact</h4>
+            <p>A replicable national benchmark for non-timber forest produce digitization in India.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       10. Contact / Footer
+       ========================================================================== -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand -->
+        <div class="footer-brand">
+          <a href="#home" class="brand-logo">
+            <div class="brand-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name" style="color: #fff;">VAN BAZAAR</span>
+              <span class="brand-tag">वन बाज़ार</span>
+            </div>
+          </a>
+          <p>
+            India's Voice-First Fair Price Platform powering tribal women forest produce collectors with daily MSP discovery, collective selling, and grievance resolution.
+          </p>
+          <div style="font-size: 0.85rem; color: #94A3B8;">
+            National Hackathon Edition • TRIFED & Van Dhan Aligned
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#prices">MSP Live Prices</a></li>
+            <li><a href="#services">Collective Selling</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#impact">Our Impact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Community & Governance -->
+        <div class="footer-col">
+          <h4>Platform Tools</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" id="footerBtnVoice">Voice Assistant</a></li>
+            <li><a href="javascript:void(0)" id="footerBtnCalc">Earnings Calculator</a></li>
+            <li><a href="javascript:void(0)" id="footerBtnGrievance">Grievance Portal</a></li>
+            <li><a href="javascript:void(0)" id="footerBtnKendras">Find Nearby Kendra</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact Info -->
+        <div class="footer-col">
+          <h4>Reach Us</h4>
+          <div class="footer-contact-info">
+            <div class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Jharkhand Pilot Hub, Khunti & Chaibasa, Jharkhand, India</span>
+            </div>
+
+            <div class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>support@vanbazaar.in</span>
+            </div>
+
+            <div class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>Toll-Free Helpline: +91 9876543210</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div>
+          © 2026 Van Bazaar. All rights reserved. Open Innovation for Tribal Livelihoods.
+        </div>
+        <div class="footer-mantra">
+          Strong Women. Strong Forests. Stronger India.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       Interactive Modals
+       ========================================================================== -->
+
+  <!-- 1. Voice Assistant Modal -->
+  <div class="modal-overlay" id="voiceModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+            Van Bazaar Voice Assistant
+          </h3>
+          <span style="font-size: 0.8rem; color: var(--text-light);">आदिवासी वनोपज वॉयस AI सहायक</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div class="voice-lang-tabs">
+            <button type="button" class="voice-lang-tab-btn active" id="btnVoiceLangHi" data-vlang="hi">🇮🇳 हिंदी</button>
+            <button type="button" class="voice-lang-tab-btn" id="btnVoiceLangEn" data-vlang="en">🌐 English</button>
+            <button type="button" class="voice-lang-tab-btn" id="btnVoiceLangSan" data-vlang="san">🌿 ᱥᱟᱱᱛᱟᱲᱤ</button>
+          </div>
+          <button class="btn-close-modal" id="btnCloseVoiceModal" aria-label="Close Voice Assistant">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Interactive Mic & Pulse Visualizer -->
+        <div class="voice-interactive-center">
+          <div class="voice-mic-main-wrap">
+            <button type="button" class="voice-mic-main-btn" id="btnVoiceMicRecord" title="Tap to Speak (माइक दबाकर बोलें)" aria-label="Microphone Speech Recognition Toggle">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Waveform Visualizer -->
+          <div class="voice-wave-container" id="voiceWaveform">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+
+          <div class="voice-status-pill" id="voiceStatusIndicator">
+            <span>🎙️ Tap Microphone to Speak (माइक दबाकर बोलें)</span>
+          </div>
+        </div>
+
+        <!-- Live Spoken Transcript -->
+        <div class="voice-live-transcript" id="voiceLiveTranscript" style="display: none;">
+          <span style="font-size: 1.1rem;">🗣️</span>
+          <span id="voiceTranscriptText">Listening to your voice...</span>
+        </div>
+
+        <!-- AI Spoken Response Card -->
+        <div class="voice-response-card" id="voiceAssistantOutput">
+          <div class="voice-response-text" id="voiceResponseText">
+            "नमस्ते! आप महुआ, लाह, इमली के सरकारी भाव या सामूहिक बिक्री के बारे में बोलकर पूछ सकते हैं।"
+          </div>
+          <div class="voice-response-translation" id="voiceResponseTranslation">
+            "Namaste! Ask today's MSP prices, collective selling bonus, or nearest Kendra in Hindi or English."
+          </div>
+
+          <!-- Audio Toolbar with Replay and Context Action -->
+          <div class="voice-actions-toolbar" id="voiceActionsToolbar">
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button type="button" class="btn-voice-audio-ctrl" id="btnVoiceAudioToggle" title="Replay voice audio">
+                <span>🔊 Replay Audio (दोबारा सुनें)</span>
+              </button>
+              <button type="button" class="btn-voice-audio-ctrl" id="btnVoiceAudioStop" style="display: none;" title="Stop audio">
+                <span>⏹️ Stop Audio</span>
+              </button>
+            </div>
+            <button type="button" class="btn-voice-direct-action" id="btnVoiceDirectAction" style="display: none;">
+              <span>👉 View Prices</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Manual Type Fallback (For devices without mic) -->
+        <form class="voice-manual-input-box" id="voiceManualForm">
+          <input type="text" id="voiceManualInput" placeholder='Type question: "Mahua price", "Lac rate", "Calculator"...' aria-label="Type question for voice assistant">
+          <button type="submit" id="btnVoiceManualSubmit">Ask AI</button>
+        </form>
+
+        <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-light); text-transform: uppercase; margin-bottom: 0.35rem; display: flex; justify-content: space-between; align-items: center;">
+          <span>Quick Questions (Click to Ask & Listen):</span>
+          <span style="font-size: 0.75rem; color: var(--primary);">👆 Tap Any</span>
+        </div>
+
+        <div class="quick-voice-prompts" id="quickVoicePrompts">
+          <!-- Populated via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Collective Selling Bonus Calculator Modal -->
+  <div class="modal-overlay" id="calcModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #D97706;">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+          </svg>
+          Collective Selling Calculator (Bachat & Labh)
+        </h3>
+        <button class="btn-close-modal" id="btnCloseCalcModal" aria-label="Close Calculator">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          See how much extra money your women collector group earns by aggregating produce instead of selling alone to village middlemen.
+        </p>
+
+        <div class="calc-field-group">
+          <label class="calc-label" for="calcProduceSelect">Select Forest Produce</label>
+          <select class="calc-select" id="calcProduceSelect">
+            <option value="mahua" data-msp="35" data-trader="28">Mahua Flowers (MSP ₹35 / KG vs Trader ₹28)</option>
+            <option value="lac" data-msp="320" data-trader="240">Kusmi Lac (MSP ₹320 / KG vs Trader ₹240)</option>
+            <option value="tamarind" data-msp="36" data-trader="27">Wild Tamarind (MSP ₹36 / KG vs Trader ₹27)</option>
+            <option value="sal-seed" data-msp="22" data-trader="16">Sal Seeds (MSP ₹22 / KG vs Trader ₹16)</option>
+            <option value="honey" data-msp="225" data-trader="170">Forest Honey (MSP ₹225 / KG vs Trader ₹170)</option>
+            <option value="harra" data-msp="18" data-trader="13">Harra Fruit (MSP ₹18 / KG vs Trader ₹13)</option>
+          </select>
+        </div>
+
+        <div class="calc-field-group">
+          <label class="calc-label" for="calcWeightInput">Total Weight Collected (in KG)</label>
+          <input type="number" class="calc-input" id="calcWeightInput" value="100" min="10" max="5000">
+        </div>
+
+        <div class="calc-field-group">
+          <label class="calc-label" for="calcWomenInput">Number of Women in Group (SHG Members)</label>
+          <input type="number" class="calc-input" id="calcWomenInput" value="5" min="1" max="50">
+        </div>
+
+        <!-- Calculated Result Box -->
+        <div class="calc-result-box">
+          <div class="calc-result-row">
+            <span>Middleman Trader Payout:</span>
+            <strong id="resTraderPayout">₹2,800</strong>
+          </div>
+          <div class="calc-result-row">
+            <span>Van Kendra MSP Total:</span>
+            <strong id="resMspPayout" style="color: var(--primary);">₹3,500</strong>
+          </div>
+          <div class="calc-result-row">
+            <span>Group Aggregation Bonus (5% Extra):</span>
+            <strong id="resGroupBonus" style="color: #D97706;">+₹175</strong>
+          </div>
+          <div class="calc-result-row calc-result-highlight">
+            <span>Total Group Income:</span>
+            <span id="resTotalIncome">₹3,675</span>
+          </div>
+          <div class="calc-result-row" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--primary);">
+            <span>Extra Profit Earned Together:</span>
+            <strong id="resNetExtraGain">+₹875 (+31.2%)</strong>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="btnConfirmAggregation" style="width: 100%; margin-top: 1.5rem;">
+          Register Group Aggregation at Van Kendra
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Voice Grievance & Accountability Modal -->
+  <div class="modal-overlay" id="grievanceModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--danger);">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          Voice Grievance & Accountability Portal
+        </h3>
+        <button class="btn-close-modal" id="btnCloseGrievanceModal" aria-label="Close Grievance Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Report underpayment, closed Kendra, delayed payment, or faulty weighing machines. Submissions are geo-tagged and sent directly to the District Collector & TRIFED officer.
+        </p>
+
+        <form id="grievanceForm">
+          <div class="calc-field-group">
+            <label class="calc-label">Select Nearest Kendra</label>
+            <select class="calc-select" id="grievanceKendraSelect" required>
+              <option value="Torpa Van Kendra (Khunti)">Torpa Van Kendra (Khunti)</option>
+              <option value="Murhu Mahila Samuh Kendra (Khunti)">Murhu Mahila Samuh Kendra (Khunti)</option>
+              <option value="Chakradharpur Forest Hub (West Singhbhum)">Chakradharpur Forest Hub (West Singhbhum)</option>
+              <option value="Goilkera Tribal Producer Kendra (West Singhbhum)">Goilkera Tribal Producer Kendra (West Singhbhum)</option>
+            </select>
+          </div>
+
+          <div class="calc-field-group">
+            <label class="calc-label">Issue Category</label>
+            <select class="calc-select" id="grievanceCategorySelect" required>
+              <option value="Underpayment / Less Rate Offered">Underpayment / Lower than MSP Rate Offered</option>
+              <option value="Faulty / Wrong Weighing Scale">Faulty / Wrong Weighing Scale</option>
+              <option value="Kendra Closed During Official Hours">Kendra Closed During Working Hours</option>
+              <option value="Delayed DBT Payment">Delayed Direct Bank Transfer Payout</option>
+              <option value="Middleman Harassment">Middleman Harassment or Intimidation</option>
+            </select>
+          </div>
+
+          <div class="calc-field-group">
+            <label class="calc-label">Voice Recording / Complaint Note</label>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <button type="button" class="btn btn-voice btn-sm" id="btnRecordGrievanceVoice" style="flex: 1;">
+                <span id="recordVoiceText">🎙️ Tap to Record Voice Complaint (Hindi / Mundari)</span>
+              </button>
+            </div>
+            <textarea class="calc-input" id="grievanceDetails" rows="3" placeholder="Describe the issue or record using microphone... (e.g. आज तोरपा केंद्र पर महुआ के लिए 35 की जगह केवल 30 रुपये दिया जा रहा था)"></textarea>
+          </div>
+
+          <div class="calc-field-group">
+            <label class="calc-label">Collector Mobile Number (For Status SMS)</label>
+            <input type="tel" class="calc-input" id="grievancePhone" placeholder="+91 9431X XXXXX" value="9431188201" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; background: var(--danger);">
+            Submit Grievance to TRIFED District Desk
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Language Selector Modal -->
+  <div class="modal-overlay" id="langModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          Select Your Language (भाषा चुनें)
+        </h3>
+        <button class="btn-close-modal" id="btnCloseLangModal" aria-label="Close Language Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.5rem; text-align: center;">
+          Van Bazaar supports tribal dialects of Jharkhand and Eastern India.
+        </p>
+
+        <div class="lang-grid">
+          <div class="lang-card-option active" data-lang="en">
+            <h4>English</h4>
+            <p>Default International</p>
+          </div>
+          <div class="lang-card-option" data-lang="hi">
+            <h4>हिंदी</h4>
+            <p>Hindi (झारखंड राज्य)</p>
+          </div>
+          <div class="lang-card-option" data-lang="san">
+            <h4>ᱥᱟᱱᱛᱟᱲᱤ</h4>
+            <p>Santhali (Santali Dialect)</p>
+          </div>
+          <div class="lang-card-option" data-lang="mun">
+            <h4>मुंडारी</h4>
+            <p>Mundari (Khunti Region)</p>
+          </div>
+          <div class="lang-card-option" data-lang="ho">
+            <h4>हो</h4>
+            <p>Ho (West Singhbhum)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Easy Login & OTP Verification Modal -->
+  <div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          <span id="loginModalTitle">Van Bazaar Portal Login</span>
+        </h3>
+        <button class="btn-close-modal" id="btnCloseLoginModal" aria-label="Close Login Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- STEP 1: Direct User Details Entry -->
+        <div id="loginStep1">
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Enter your name and registered mobile number to receive your login security OTP:
+          </p>
+
+          <form id="loginForm">
+            <div class="calc-field-group">
+              <label class="calc-label" for="loginNameInput">Your Full Name (आपका नाम)</label>
+              <input type="text" class="calc-input" id="loginNameInput" placeholder="e.g. Sunita Munda / बिरबाहा हांसदा" value="Sunita Munda" required>
+            </div>
+
+            <div class="calc-field-group">
+              <label class="calc-label" for="loginPhoneInput">Mobile Number / Van Dhan Card ID (मोबाइल नंबर)</label>
+              <input type="tel" class="calc-input" id="loginPhoneInput" placeholder="10-digit mobile (e.g. 9431188201)" value="9431188201" maxlength="10" required>
+            </div>
+
+            <div class="calc-field-group">
+              <label class="calc-label" for="loginRole">Designated Role (पद / भूमिका)</label>
+              <select class="calc-select" id="loginRole">
+                <option value="collector">Tribal Collector / Mahila SHG Member (महिला वनोपज संग्राहक)</option>
+                <option value="incharge">Van Kendra Center In-Charge (वन केंद्र प्रभारी)</option>
+                <option value="officer">TRIFED / Forest Nodal Officer (नोडल पदाधिकारी)</option>
+                <option value="buyer">Institutional / Ayurvedic Buyer (संस्थागत क्रेता)</option>
+              </select>
+            </div>
+
+            <div class="calc-field-group">
+              <label class="calc-label" for="loginKendraSelect">Assigned Van Kendra (संबंधित केंद्र)</label>
+              <select class="calc-select" id="loginKendraSelect">
+                <option value="Torpa Van Dhan Vikas Kendra (Khunti)">Torpa Van Dhan Vikas Kendra (Khunti)</option>
+                <option value="Murhu Mahila Samuh Hub (Khunti)">Murhu Mahila Samuh Hub (Khunti)</option>
+                <option value="Chakradharpur Forest Hub (West Singhbhum)">Chakradharpur Forest Hub (West Singhbhum)</option>
+                <option value="Goilkera Producer Center (West Singhbhum)">Goilkera Producer Center (West Singhbhum)</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <button type="button" class="btn btn-voice btn-sm" id="btnVoiceOtpLogin" style="width: 100%;">
+                🎙️ Instant Voice Biometric: "Van Bazaar Khunti"
+              </button>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btnSendOtpSubmit" style="width: 100%;">
+              Send One-Time Passcode (OTP) ➔
+            </button>
+          </form>
+        </div>
+
+        <!-- STEP 2: OTP Dashboard -->
+        <div id="loginStep2" style="display: none;">
+          
+          <!-- Target Phone Card -->
+          <div class="otp-target-card">
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-light); display: block;">Verification Code Sent To</span>
+              <strong id="otpTargetPhoneDisplay" style="color: var(--dark-green);">+91 94311 88201</strong>
+            </div>
+            <button type="button" class="btn-edit-phone" id="btnEditLoginPhone">✏️ Change</button>
+          </div>
+
+          <!-- Simulated SMS Notification Banner with Auto-Fill -->
+          <div class="simulated-sms-banner" id="simulatedSmsBanner">
+            <div class="sms-banner-text">
+              <span>📩 <strong>SMS Alert:</strong> Your Van Bazaar login OTP is <strong class="sms-otp-code" id="generatedOtpBadge">4829</strong></span>
+            </div>
+            <button type="button" class="btn-autofill-otp" id="btnAutoFillOtp" title="Click to auto-fill OTP">
+              ⚡ Auto-Fill Code
+            </button>
+          </div>
+
+          <div style="text-align: center; margin-block: 0.75rem 0.5rem;">
+            <label class="calc-label" for="otpSingleInput" style="font-size: 1rem; margin-bottom: 0.25rem;">
+              Enter 4-Digit Security OTP (ओटीपी यहाँ टाइप करें)
+            </label>
+            <p style="font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.75rem;">
+              Type 4 digits using your keyboard or click the number keypad:
+            </p>
+
+            <!-- Single Unified Clean Input Box for Direct Typing -->
+            <div style="max-width: 240px; margin: 0 auto 0.75rem auto;">
+              <input type="text" id="otpSingleInput" class="otp-single-field" maxlength="4" placeholder="••••" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" autofocus>
+            </div>
+
+            <!-- 4 Synced Visual Digit Boxes -->
+            <div class="otp-inputs-row" id="otpVisualBoxes">
+              <div class="otp-digit-box" id="otpBox1">-</div>
+              <div class="otp-digit-box" id="otpBox2">-</div>
+              <div class="otp-digit-box" id="otpBox3">-</div>
+              <div class="otp-digit-box" id="otpBox4">-</div>
+            </div>
+          </div>
+
+          <!-- Touch Keypad (For mouse click / touch screen users) -->
+          <div class="otp-keypad" id="otpKeypad">
+            <button type="button" class="otp-key-btn" data-digit="1">1</button>
+            <button type="button" class="otp-key-btn" data-digit="2">2</button>
+            <button type="button" class="otp-key-btn" data-digit="3">3</button>
+            <button type="button" class="otp-key-btn" data-digit="4">4</button>
+            <button type="button" class="otp-key-btn" data-digit="5">5</button>
+            <button type="button" class="otp-key-btn" data-digit="6">6</button>
+            <button type="button" class="otp-key-btn" data-digit="7">7</button>
+            <button type="button" class="otp-key-btn" data-digit="8">8</button>
+            <button type="button" class="otp-key-btn" data-digit="9">9</button>
+            <button type="button" class="otp-key-btn" data-action="clear" style="font-size: 0.9rem; color: var(--text-light);">Clear</button>
+            <button type="button" class="otp-key-btn" data-digit="0">0</button>
+            <button type="button" class="otp-key-btn" data-action="backspace" style="font-size: 1.1rem; color: var(--danger);">⌫</button>
+          </div>
+
+          <!-- Timer & Actions -->
+          <div class="otp-resend-row">
+            <span id="otpTimerWrapper">⏳ Resend code in <strong id="otpCountdown">30</strong>s</span>
+            <button type="button" id="btnResendOtp" style="display: none;" class="btn-resend-link">🔄 Resend OTP</button>
+            <button type="button" id="btnVoiceOtpSpeak" class="btn-resend-link">🔊 Listen in Hindi</button>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="button" class="btn btn-primary" id="btnVerifyOtpSubmit" style="width: 100%; font-size: 1rem; padding: 0.85rem;">
+            Verify & Login to Portal (सत्यापित करें)
+          </button>
+          
+          <button type="button" class="btn btn-outline btn-sm" id="btnBackToLoginStep1" style="width: 100%; margin-top: 0.75rem;">
+            ← Back to Mobile Entry
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 5B. User Member Account Portal Modal -->
+  <div class="modal-overlay" id="userMemberModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Van Dhan Member Portal
+        </h3>
+        <button class="btn-close-modal" id="btnCloseUserMemberModal" aria-label="Close Member Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Member Hero Banner -->
+        <div class="member-hero-banner">
+          <div class="member-avatar-lg" id="memberAvatarLg">SM</div>
+          <div>
+            <h3 id="memberNameDisplay" style="color: #fff; font-size: 1.3rem; margin-bottom: 2px;">Sunita Munda (सुनीता मुंडा)</h3>
+            <div style="font-size: 0.85rem; color: #DCFCE7;" id="memberKendraDisplay">Torpa Van Dhan Vikas Kendra (Khunti)</div>
+            <div class="member-badge-pill" id="memberRoleBadge">
+              🟢 Verified Van Dhan Member • ID: VD-JH-2026-8492
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Member Metric Tiles -->
+        <div class="member-metrics-grid">
+          <div class="member-metric-card">
+            <h6>DBT Earnings</h6>
+            <div class="metric-val" id="memberWalletBal">₹14,850</div>
+            <span style="font-size: 0.72rem; color: #15803D;">+₹1,250 Bonus</span>
+          </div>
+          <div class="member-metric-card">
+            <h6>Total Produce</h6>
+            <div class="metric-val" id="memberProduceTotal">420 KG</div>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">Mahua, Lac & Honey</span>
+          </div>
+          <div class="member-metric-card">
+            <h6>Active Groups</h6>
+            <div class="metric-val" id="memberActiveGroups">2 Batches</div>
+            <span style="font-size: 0.72rem; color: #D97706;">Aggregating</span>
+          </div>
+        </div>
+
+        <!-- Recent DBT Payout Passbook -->
+        <div style="font-size: 0.84rem; font-weight: 700; color: var(--dark-green); margin-bottom: 0.4rem;">
+          📜 Recent DBT Settlement Passbook:
+        </div>
+        <div class="member-passbook-list">
+          <div class="passbook-entry">
+            <span>🌾 105 KG Mahua (Torpa Kendra)</span>
+            <strong style="color: #15803D;">+₹3,675</strong>
+          </div>
+          <div class="passbook-entry">
+            <span>🪵 30 KG Kusmi Lac (Murhu Hub)</span>
+            <strong style="color: #15803D;">+₹9,600</strong>
+          </div>
+          <div class="passbook-entry">
+            <span>🤝 5% Collective Bonus (DBT Ref: SBIN-2026-94)</span>
+            <strong style="color: #D97706;">+₹1,575</strong>
+          </div>
+        </div>
+
+        <!-- Action Shortcuts -->
+        <div class="member-actions-grid">
+          <button type="button" class="btn btn-outline btn-sm" id="btnMemberStartGroup" style="font-size: 0.85rem;">
+            🤝 Sell Together Batch
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" id="btnMemberCheckPrices" style="font-size: 0.85rem;">
+            📊 Live MSP Prices
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" id="btnMemberRaiseGrievance" style="font-size: 0.85rem;">
+            🛡️ File Grievance
+          </button>
+          
+          <!-- Shown ONLY for Verified Leaders (In-Charge / Officer) -->
+          <button type="button" class="btn btn-primary btn-sm" id="btnMemberLeaderDesk" style="font-size: 0.85rem; display: none; background: #D97706; border-color: #B45309;">
+            👑 Leader Portal
+          </button>
+          <!-- Shown for Normal Collectors -->
+          <button type="button" class="btn btn-outline btn-sm" id="btnMemberSupportDesk" style="font-size: 0.85rem;">
+            📞 Kendra Helpline
+          </button>
+        </div>
+
+        <button type="button" class="btn btn-outline" id="btnLogoutUser" style="width: 100%; border-color: #EF4444; color: #DC2626; margin-top: 0.5rem;">
+          🚪 Logout from Portal (लॉगआउट करें)
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 5C. Leader Access Security Authorization Gate Modal -->
+  <div class="modal-overlay" id="leaderAuthModal" role="dialog" aria-modal="true">
+    <div class="modal-card leader-gate-card">
+      <div class="leader-gate-header">
+        <div class="leader-gate-icon">🔒</div>
+        <div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 2px;">Restricted Leader Access</h3>
+          <span style="font-size: 0.8rem; color: #FDE68A;">केंद्रीय नेतृत्व प्राधिकरण सत्यापन</span>
+        </div>
+        <button class="btn-close-modal" id="btnCloseLeaderAuthModal" aria-label="Close Security Modal" style="margin-left: auto; color: #fff;">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+          The <strong>Leader Portal</strong> contains confidential district aggregation ledgers, biometric logs, and field grievance investigation records. Access is strictly reserved for <strong>Van Kendra Center In-Charges</strong> and <strong>TRIFED Nodal Officers</strong>.
+        </p>
+
+        <!-- Current User Role Status Alert -->
+        <div class="leader-role-status-card" id="leaderAuthStatusCard">
+          <div style="font-size: 1.3rem;">⚠️</div>
+          <div>
+            <strong id="leaderAuthUserTitle" style="color: #991B1B; font-size: 0.88rem; display: block;">Standard Collector Account</strong>
+            <span id="leaderAuthUserDesc" style="font-size: 0.8rem; color: #B91C1C;">
+              Normal collectors cannot view administrative leader records.
+            </span>
+          </div>
+        </div>
+
+        <!-- Security Passcode Form -->
+        <form id="leaderPinForm">
+          <div style="text-align: center; margin-bottom: 1.25rem;">
+            <label class="calc-label" for="leaderPinInput" style="font-size: 0.92rem; margin-bottom: 0.35rem;">
+              Enter 4-Digit Nodal Leader PIN (लीडर पिन दर्ज करें)
+            </label>
+            <input type="password" id="leaderPinInput" class="leader-pin-input" maxlength="4" placeholder="••••" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autofocus required>
+            <span style="font-size: 0.76rem; color: var(--text-light); display: block; margin-top: 0.25rem;">
+              🔑 Official Pilot Leader PIN: <strong>2026</strong>
+            </span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btnUnlockLeaderModal" style="width: 100%; background: #D97706; border-color: #B45309; font-size: 0.95rem;">
+            🔓 Unlock Leader Portal (अनलॉक करें)
+          </button>
+        </form>
+
+        <div style="margin-top: 1rem; text-align: center;">
+          <button type="button" class="btn btn-outline btn-sm" id="btnSwitchToLeaderLogin" style="width: 100%; font-size: 0.82rem;">
+            🔑 Login with Center In-Charge Account
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Leader Access Overview Dashboard Modal -->
+  <div class="modal-overlay" id="leaderModal" role="dialog" aria-modal="true">
+    <div class="modal-card leader-modal-card">
+      <div class="leader-dashboard-header">
+        <div class="leader-header-left">
+          <div style="background: #F59E0B; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 1.4rem; box-shadow: 0 4px 12px rgba(245,158,11,0.3);">
+            👑
+          </div>
+          <div>
+            <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 2px;">Van Kendra Nodal Leader Portal (केंद्रीय नेतृत्व डैशबोर्ड)</h3>
+            <span style="font-size: 0.82rem; color: #9CCC65; font-weight: 500;">Live Monitoring & Field Aggregation Directory (Jharkhand Pilot: Khunti & W. Singhbhum)</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button class="btn btn-outline btn-sm" id="btnExportLeaderData" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);">
+            📥 Export CSV
+          </button>
+          <button class="btn-close-modal" id="btnCloseLeaderModal" aria-label="Close Leader Dashboard" style="background: rgba(255,255,255,0.2); color: #fff;">&times;</button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding: 2rem;">
+        <!-- 4 KPI Overview Metric Tiles -->
+        <div class="leader-kpi-grid">
+          <div class="leader-kpi-tile">
+            <div class="kpi-tile-icon tile-icon-1">👥</div>
+            <div class="kpi-tile-info">
+              <h5>Active Users & Logins</h5>
+              <div class="kpi-num" id="kpiActiveUsers">5 Logins</div>
+            </div>
+          </div>
+          <div class="leader-kpi-tile">
+            <div class="kpi-tile-icon tile-icon-2">🤝</div>
+            <div class="kpi-tile-info">
+              <h5>Open Collective Groups</h5>
+              <div class="kpi-num" id="kpiOpenGroups">3 Batches</div>
+            </div>
+          </div>
+          <div class="leader-kpi-tile">
+            <div class="kpi-tile-icon tile-icon-3">⚖️</div>
+            <div class="kpi-tile-info">
+              <h5>Aggregated Weight</h5>
+              <div class="kpi-num" id="kpiTotalWeight">1,015 KG</div>
+            </div>
+          </div>
+          <div class="leader-kpi-tile">
+            <div class="kpi-tile-icon tile-icon-4">🛡️</div>
+            <div class="kpi-tile-info">
+              <h5>Field Grievance Tickets</h5>
+              <div class="kpi-num" id="kpiGrievancesCount">2 Active</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segmented Tab Navigation -->
+        <div class="leader-tabs-nav">
+          <button class="leader-tab-btn active" data-tab="tab-selling-groups">
+            🤝 Collective Selling Directory (<span id="tabCountGroups">3</span>)
+          </button>
+          <button class="leader-tab-btn" data-tab="tab-user-logins">
+            🔐 User Logins & Auth Stream (<span id="tabCountLogins">5</span>)
+          </button>
+          <button class="leader-tab-btn" data-tab="tab-grievance-desk">
+            🛡️ Grievance Escalations (<span id="tabCountGrievances">2</span>)
+          </button>
+        </div>
+
+        <!-- Search / Filter in Dashboard -->
+        <div style="margin-bottom: 1.25rem; display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <input type="text" id="leaderSearchInput" class="form-input-control" placeholder="🔍 Search collector name, phone, village, or produce..." style="max-width: 460px;">
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">🟢 Real-Time Synced</span>
+            <button class="btn btn-outline btn-sm" id="btnRefreshLeaderData" title="Refresh Live Data">
+              🔄 Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 1: Collective Selling Directory -->
+        <div class="leader-tab-content active" id="tab-selling-groups">
+          <div class="leader-table-wrap">
+            <table class="leader-data-table">
+              <thead>
+                <tr>
+                  <th>Group ID</th>
+                  <th>Collector / SHG Leader</th>
+                  <th>Contact Phone</th>
+                  <th>Village / Kendra</th>
+                  <th>Produce Items & Qty</th>
+                  <th>Total Weight</th>
+                  <th>Batch Status</th>
+                  <th>Nodal Actions</th>
+                </tr>
+              </thead>
+              <tbody id="leaderSellingGroupsTableBody">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 2: User Logins Stream -->
+        <div class="leader-tab-content" id="tab-user-logins">
+          <div class="leader-table-wrap">
+            <table class="leader-data-table">
+              <thead>
+                <tr>
+                  <th>Session ID</th>
+                  <th>User / Official Name</th>
+                  <th>Contact Mobile</th>
+                  <th>Designated Role</th>
+                  <th>Van Kendra Location</th>
+                  <th>Authentication Method</th>
+                  <th>Login Time</th>
+                  <th>Live Status</th>
+                </tr>
+              </thead>
+              <tbody id="leaderLoginsTableBody">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 3: Grievance Desk -->
+        <div class="leader-tab-content" id="tab-grievance-desk">
+          <div class="leader-table-wrap">
+            <table class="leader-data-table">
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Collector Phone</th>
+                  <th>Van Kendra</th>
+                  <th>Category</th>
+                  <th>Voice Transcript / Details</th>
+                  <th>Filed Time</th>
+                  <th>Resolution Status</th>
+                </tr>
+              </thead>
+              <tbody id="leaderGrievancesTableBody">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Component -->
+  <div class="toast-msg" id="toastMsg" role="status" aria-live="polite">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+      <polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <span id="toastText">Action completed successfully!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js?v=20260901_4"></script>
+  <script src="js/app.js?v=20260901_4"></script>
+</body>
+</html>

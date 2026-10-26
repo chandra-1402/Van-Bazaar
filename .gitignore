@@ -1,0 +1,22 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Windows shortcuts
+*.lnk
+
+# Editor / IDE metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Server logs & cache
+*.log
+__pycache__/
