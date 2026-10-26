@@ -11,12 +11,12 @@
  */
 
 window.VAN_BAZAAR_FIREBASE_CONFIG = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  apiKey: "AIzaSyBhLzeJMy0I0EJxwMrpt9s4LcouGskkE6U",
+  authDomain: "van-bazaar.firebaseapp.com",
+  projectId: "van-bazaar",
+  storageBucket: "van-bazaar.firebasestorage.app",
+  messagingSenderId: "1040176754904",
+  appId: "1:1040176754904:web:0cff7e82ee0db6b781e7ad"
 };
 
 // Check if user saved custom Firebase credentials in localStorage

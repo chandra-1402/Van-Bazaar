@@ -2273,23 +2273,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof firebase === 'undefined') return null;
     if (window.initFirebaseApp) window.initFirebaseApp();
 
-    if (!window.vanBazaarRecaptchaVerifier) {
-      const container = document.getElementById('recaptcha-container');
-      if (container) {
-        try {
-          window.vanBazaarRecaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-            size: 'invisible',
-            callback: () => {
-              console.log("reCAPTCHA solved for phone authentication.");
-            },
-            'expired-callback': () => {
-              showToast("⚠️ Security reCAPTCHA expired. Please try sending OTP again.");
-            }
-          });
-          window.vanBazaarRecaptchaVerifier.render();
-        } catch (e) {
-          console.warn("Recaptcha verifier warning:", e);
-        }
+    if (window.vanBazaarRecaptchaVerifier) {
+      try {
+        window.vanBazaarRecaptchaVerifier.clear();
+      } catch (e) {}
+      window.vanBazaarRecaptchaVerifier = null;
+    }
+
+    const container = document.getElementById('recaptcha-container');
+    if (container) {
+      container.innerHTML = '';
+      try {
+        window.vanBazaarRecaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+          size: 'invisible',
+          callback: () => {
+            console.log("reCAPTCHA solved for phone authentication.");
+          },
+          'expired-callback': () => {
+            showToast("⚠️ Security reCAPTCHA expired. Please try sending OTP again.");
+          }
+        });
+      } catch (e) {
+        console.warn("Recaptcha verifier warning:", e);
       }
     }
     return window.vanBazaarRecaptchaVerifier;
