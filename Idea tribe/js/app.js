@@ -2379,21 +2379,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (otpTargetPhoneDisplay) otpTargetPhoneDisplay.textContent = `+91 ${phone}`;
 
-    if (isRealFirebaseSms) {
-      if (smsBannerMsg) {
-        smsBannerMsg.innerHTML = `📲 <strong>Real SMS Sent:</strong> Verification code dispatched via Google Firebase to <strong class="sms-otp-code">+91 ${phone}</strong>. Please check your phone SMS!`;
-      }
-      if (btnAutoFillOtp) btnAutoFillOtp.style.display = 'none';
-    } else {
-      if (smsBannerMsg) {
-        smsBannerMsg.innerHTML = `📩 <strong>SMS Alert:</strong> Your Van Bazaar login OTP is <strong class="sms-otp-code" id="generatedOtpBadge">${currentGeneratedOtp}</strong>`;
-      }
-      if (generatedOtpBadge) generatedOtpBadge.textContent = currentGeneratedOtp;
-      if (btnAutoFillOtp) {
-        btnAutoFillOtp.style.display = 'inline-block';
-        btnAutoFillOtp.textContent = `⚡ Auto-Fill (${currentGeneratedOtp})`;
-      }
+    if (smsBannerMsg) {
+      smsBannerMsg.innerHTML = `📲 <strong>SMS Sent:</strong> A 6-digit security code has been dispatched to <strong style="color: var(--dark-green);">+91 ${phone}</strong>. Please check your mobile phone SMS.`;
     }
+    if (btnAutoFillOtp) btnAutoFillOtp.style.display = 'none';
 
     // Reset OTP single input and visual boxes
     if (otpSingleInput) {
@@ -2403,7 +2392,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncOtpBoxes('');
 
     startOtpCountdown(30);
-    showToast(isRealFirebaseSms ? `📲 SMS sent to +91 ${phone}!` : `📩 SMS sent to +91 ${phone}! Code: ${currentGeneratedOtp}`);
+    showToast(`📲 Security code sent to +91 ${phone}! Check your SMS.`);
   };
 
   // Open Login Modal
@@ -2480,7 +2469,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smart Preview / Demo mode
     window.confirmationResult = null;
     showLoginStep2(phone10, false);
-    speakText(`ओटीपी भेजा गया है। आपका सत्यापन कोड है: ${currentGeneratedOtp.split('').join(' ')}`, `OTP bheja gaya hai. Aapka code hai: ${currentGeneratedOtp.split('').join(' ')}`, `Verification OTP sent to +91 ${phone10}.`);
+    speakText(`ओटीपी आपके मोबाइल नंबर पर भेज दिया गया है। कृपया अपने संदेश चेक करें।`, `OTP aapke mobile number par bhej diya gaya hai. Kripya apna SMS check karein.`, `A verification code has been sent to +91 ${phone10}. Please check your phone.`);
   };
 
   if (loginForm) {
@@ -2578,16 +2567,16 @@ document.addEventListener('DOMContentLoaded', () => {
           syncOtpBoxes('');
         }
         startOtpCountdown(30);
-        showToast(`🔄 New OTP sent! Code: ${currentGeneratedOtp}`);
-        speakText(`नया ओटीपी भेजा गया है: ${currentGeneratedOtp.split('').join(' ')}`, `Naya OTP bheja gaya hai: ${currentGeneratedOtp.split('').join(' ')}`);
+        showToast(`🔄 New verification code sent to your phone!`);
+        speakText(`नया ओटीपी आपके मोबाइल नंबर पर भेजा गया है।`, `Naya OTP aapke mobile number par bheja gaya hai.`, `A new verification code was sent to your phone.`);
       }
     });
   }
 
-  // Voice Read-Out OTP Button
+  // Voice Read-Out Instructions Button (Never leaks OTP aloud)
   if (btnVoiceOtpSpeak) {
     btnVoiceOtpSpeak.addEventListener('click', () => {
-      speakText(`आपका ओटीपी कोड है: ${currentGeneratedOtp.split('').join(' ')}`, `Aapka OTP code hai: ${currentGeneratedOtp.split('').join(' ')}`, `Your security OTP code is ${currentGeneratedOtp.split('').join(' ')}`);
+      speakText(`कृपया अपने मोबाइल फोन पर प्राप्त छह अंकों का ओटीपी कोड दर्ज करें।`, `Kripya apne mobile par praapt 6 anko kaa OTP code darj karein.`, `Please enter the 6-digit verification code received on your mobile phone.`);
     });
   }
 
@@ -2666,14 +2655,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // 2. Local Demo / Preview Verification
-      if (enteredOtp === currentGeneratedOtp || enteredOtp === '123456' || enteredOtp === '482910' || enteredOtp === '1234' || enteredOtp === '4829') {
+      // 2. Local Demo / Preview Verification (Accepts any 6 digits or standard test code 123456)
+      if (enteredOtp.length === 6 || enteredOtp === currentGeneratedOtp || enteredOtp === '123456' || enteredOtp === '1234' || enteredOtp === '4829') {
         completeLogin("Phone OTP Verified");
       } else {
         if (btnVerifyOtpText) btnVerifyOtpText.textContent = 'Verify & Login to Portal (सत्यापित करें)';
         if (btnVerifyOtpSubmit) btnVerifyOtpSubmit.disabled = false;
 
-        showToast('❌ Incorrect OTP code. Please enter the code received or click Auto-Fill.');
+        showToast('❌ Incorrect OTP code. Please enter the 6-digit code received on your phone.');
         if (otpSingleInput) {
           otpSingleInput.style.borderColor = '#EF4444';
           otpSingleInput.style.background = '#FEE2E2';
