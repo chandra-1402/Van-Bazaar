@@ -69,7 +69,13 @@ Minor Forest Produce (MFP / NTFP) such as **Mahua**, **Kusmi Lac**, **Wild Tamar
   - Delay in direct bank transfers (DBT)
 - Directly flags incidents to the local Van Kendra supervisor and TRIFED grievance cell.
 
-### 6. 👑 SHG Leader & Kendra Admin Dashboard
+### 6. 🔐 Real Phone SMS OTP Authentication (Google Firebase)
+- Direct verification to physical mobile phones via standard 6-digit SMS OTP.
+- Uses **Google Firebase Phone Authentication** with client-side invisible reCAPTCHA.
+- Zero-backend setup: credentials can be set directly in [`Idea tribe/js/firebase-config.js`](Idea%20tribe/js/firebase-config.js) or via the in-app `⚙️ Firebase Keys` modal.
+- Built-in preview/demo mode when Firebase credentials are not yet configured.
+
+### 7. 👑 SHG Leader & Kendra Admin Dashboard
 - Secured OTP-based management access for SHG leaders and Kendra supervisors.
 - Key Performance Indicators (KPIs):
   - Total Active Collectors
@@ -90,7 +96,8 @@ van bazaar/
 │   │   └── style.css              # Custom styling, dark forest theme, responsive UI
 │   ├── js/
 │   │   ├── app.js                 # App state, voice handlers, modals, calculations
-│   │   └── data.js                # Centralized MSP datasets, translations, audio scripts
+│   │   ├── data.js                # Centralized MSP datasets, translations, audio scripts
+│   │   └── firebase-config.js     # Firebase Phone Auth configuration & storage helper
 │   └── assets/
 │       ├── images/                # High-definition imagery & visual assets
 │       └── icons/                 # SVG icons and visual cues
