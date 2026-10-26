@@ -2467,11 +2467,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnSendOtpText) btnSendOtpText.textContent = 'Send One-Time Passcode (OTP) ➔';
         if (btnSendOtpSubmit) btnSendOtpSubmit.disabled = false;
 
-        showToast(`⚠️ Firebase SMS: ${firebaseErr.message || 'Error sending SMS'}. Using smart preview mode.`);
+        alert(`⚠️ Firebase SMS Error:\n\n${firebaseErr.message || 'Error sending SMS'}\n(Code: ${firebaseErr.code || 'unknown'})\n\n💡 Note: Google Firebase Free Tier requires adding Indian phone numbers under "Phone numbers for testing" in Firebase Console.`);
+        return;
       }
     }
 
-    // Smart Preview / Demo mode
+    // Smart Preview / Demo mode (when Firebase keys are not provided)
     window.confirmationResult = null;
     showLoginStep2(phone10, false);
     speakText(`ओटीपी आपके मोबाइल नंबर पर भेज दिया गया है। कृपया अपने संदेश चेक करें।`, `OTP aapke mobile number par bhej diya gaya hai. Kripya apna SMS check karein.`, `A verification code has been sent to +91 ${phone10}. Please check your phone.`);
