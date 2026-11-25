@@ -31,6 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchListingsInput = document.getElementById('searchListingsInput');
   const btnOpenCalculatorFromHub = document.getElementById('btnOpenCalculatorFromHub');
 
+  // Join Collective Group Modal Elements
+  const joinGroupModal = document.getElementById('joinGroupModal');
+  const btnCloseJoinGroupModal = document.getElementById('btnCloseJoinGroupModal');
+  const joinGroupForm = document.getElementById('joinGroupForm');
+  const joinGroupLeaderName = document.getElementById('joinGroupLeaderName');
+  const joinGroupLocation = document.getElementById('joinGroupLocation');
+  const joinGroupCurrentTotal = document.getElementById('joinGroupCurrentTotal');
+  const joinGroupCurrentTags = document.getElementById('joinGroupCurrentTags');
+  const joinMemberName = document.getElementById('joinMemberName');
+  const joinMemberPhone = document.getElementById('joinMemberPhone');
+  const joinProduceList = document.getElementById('joinProduceList');
+  const joinAddedWeight = document.getElementById('joinAddedWeight');
+  const joinNewTotalWeight = document.getElementById('joinNewTotalWeight');
+  const joinAddedValue = document.getElementById('joinAddedValue');
+  let activeJoinGroupId = null;
+
   // Leader Access Overview Elements
   const btnLeaderAccess = document.getElementById('btnLeaderAccess');
   const leaderModal = document.getElementById('leaderModal');
@@ -1420,6 +1436,200 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  const JOIN_PRODUCE_CATALOG = [
+    { key: 'mahua', label: 'महुआ फूल (Mahua Flowers)', name: 'Mahua Flowers', keywords: ['mahua', 'महुआ'], msp: 35, defaultQty: 25, min: 1, max: 5000 },
+    { key: 'lac', label: 'कुसमी लाह (Kusmi Lac)', name: 'Kusmi Lac (लाह)', keywords: ['lac', 'लाह', 'kusmi'], msp: 320, defaultQty: 10, min: 1, max: 1000 },
+    { key: 'tamarind', label: 'जंगली इमली (Wild Tamarind)', name: 'Wild Tamarind', keywords: ['tamarind', 'इमली', 'imli'], msp: 36, defaultQty: 20, min: 1, max: 2000 },
+    { key: 'sal-seed', label: 'साल / सखुआ बीज (Sal Seeds)', name: 'Sal Seeds', keywords: ['sal', 'साल', 'sakhua'], msp: 22, defaultQty: 50, min: 1, max: 10000 },
+    { key: 'honey', label: 'जंगली शहद (Forest Honey)', name: 'Wild Forest Honey', keywords: ['honey', 'शहद'], msp: 225, defaultQty: 10, min: 1, max: 500 },
+    { key: 'harra', label: 'हर्रा / हरीतकी (Harra Fruit)', name: 'Harra / Haritaki', keywords: ['harra', 'हर्रा', 'haritaki'], msp: 18, defaultQty: 20, min: 1, max: 3000 }
+  ];
+
+  const doesGroupHaveProduct = (group, prodItem) => {
+    if (!group || !Array.isArray(group.items)) return false;
+    return group.items.some(it => {
+      const lower = (it.product || '').toLowerCase();
+      return lower === prodItem.name.toLowerCase() || prodItem.keywords.some(kw => lower.includes(kw));
+    });
+  };
+
+  const updateJoinGroupEstimate = () => {
+    const group = activeListings.find(g => String(g.id) === String(activeJoinGroupId));
+    const currentTotal = group ? (parseFloat(group.totalWeight) || 0) : 0;
+    let addedKg = 0;
+    let addedVal = 0;
+
+    document.querySelectorAll('.join-produce-chk').forEach(chk => {
+      const prodKey = chk.getAttribute('data-prod');
+      const mspRate = parseFloat(chk.getAttribute('data-msp')) || 0;
+      const qtyInput = document.getElementById(`join-qty-${prodKey}`);
+      const rowItem = document.getElementById(`join-row-${prodKey}`);
+
+      if (chk.checked) {
+        if (qtyInput) {
+          qtyInput.disabled = false;
+          const val = parseFloat(qtyInput.value) || 0;
+          addedKg += val;
+          addedVal += (val * mspRate);
+        }
+        if (rowItem) rowItem.classList.add('selected');
+      } else {
+        if (qtyInput) qtyInput.disabled = true;
+        if (rowItem) rowItem.classList.remove('selected');
+      }
+    });
+
+    if (joinAddedWeight) joinAddedWeight.textContent = `+${addedKg} KG`;
+    if (joinNewTotalWeight) joinNewTotalWeight.textContent = `${currentTotal + addedKg} KG`;
+    if (joinAddedValue) joinAddedValue.textContent = `₹${Math.round(addedVal).toLocaleString('en-IN')}`;
+  };
+
+  const openJoinGroupModal = (groupId) => {
+    const group = activeListings.find(g => String(g.id) === String(groupId));
+    if (!group || !joinGroupModal) return;
+
+    activeJoinGroupId = group.id;
+
+    if (joinGroupLeaderName) joinGroupLeaderName.textContent = group.leaderName;
+    if (joinGroupLocation) joinGroupLocation.textContent = `📍 ${group.location} • ${group.membersCount || 1} Member(s)`;
+    if (joinGroupCurrentTotal) joinGroupCurrentTotal.textContent = `Current: ${group.totalWeight} KG`;
+    if (joinGroupCurrentTags) {
+      joinGroupCurrentTags.innerHTML = group.items.map(it => `
+        <span class="produce-qty-tag">🌱 ${it.product}: <strong>${it.qty} ${it.unit}</strong></span>
+      `).join('');
+    }
+
+    if (joinMemberName) {
+      joinMemberName.value = (currentLoggedUser && currentLoggedUser.name) ? currentLoggedUser.name : '';
+    }
+    if (joinMemberPhone) {
+      joinMemberPhone.value = (currentLoggedUser && currentLoggedUser.phone) ? currentLoggedUser.phone : '';
+    }
+
+    if (joinProduceList) {
+      // Put products already in this group first so User 2 immediately sees matching products
+      const sortedCatalog = [...JOIN_PRODUCE_CATALOG].sort((a, b) => {
+        const aMatch = doesGroupHaveProduct(group, a) ? 1 : 0;
+        const bMatch = doesGroupHaveProduct(group, b) ? 1 : 0;
+        return bMatch - aMatch;
+      });
+
+      let precheckedOne = false;
+      joinProduceList.innerHTML = sortedCatalog.map(prod => {
+        const isMatch = doesGroupHaveProduct(group, prod);
+        const shouldCheck = isMatch && !precheckedOne;
+        if (shouldCheck) precheckedOne = true;
+
+        return `
+          <div class="produce-check-row ${shouldCheck ? 'selected' : ''}" id="join-row-${prod.key}">
+            <label class="check-label-left">
+              <input type="checkbox" class="join-produce-chk" data-prod="${prod.key}" data-name="${prod.name}" data-msp="${prod.msp}" ${shouldCheck ? 'checked' : ''}>
+              <span>${prod.label}${isMatch ? '<span class="join-match-badge">✓ In Group</span>' : ''}</span>
+            </label>
+            <div class="qty-input-wrap">
+              <input type="number" class="qty-input-field" id="join-qty-${prod.key}" value="${prod.defaultQty}" min="${prod.min}" max="${prod.max}" placeholder="Qty" ${shouldCheck ? '' : 'disabled'}>
+              <span class="qty-unit-tag">KG</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      joinProduceList.querySelectorAll('.join-produce-chk').forEach(chk => {
+        chk.addEventListener('change', updateJoinGroupEstimate);
+        const prodKey = chk.getAttribute('data-prod');
+        const qtyInput = document.getElementById(`join-qty-${prodKey}`);
+        if (qtyInput) {
+          qtyInput.addEventListener('input', updateJoinGroupEstimate);
+        }
+      });
+    }
+
+    updateJoinGroupEstimate();
+    joinGroupModal.classList.add('active');
+  };
+
+  if (btnCloseJoinGroupModal && joinGroupModal) {
+    btnCloseJoinGroupModal.addEventListener('click', () => {
+      joinGroupModal.classList.remove('active');
+    });
+  }
+
+  if (joinGroupForm) {
+    joinGroupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const group = activeListings.find(g => String(g.id) === String(activeJoinGroupId));
+      if (!group) return;
+
+      const memberName = joinMemberName ? joinMemberName.value.trim() : '';
+      const memberPhone = joinMemberPhone ? joinMemberPhone.value.trim() : '';
+      if (!memberName || !memberPhone) {
+        showToast('⚠️ Please enter your name and mobile number to join.');
+        return;
+      }
+
+      const addedItems = [];
+      let addedKg = 0;
+
+      document.querySelectorAll('.join-produce-chk').forEach(chk => {
+        if (chk.checked) {
+          const prodKey = chk.getAttribute('data-prod');
+          const prodName = chk.getAttribute('data-name');
+          const qtyInput = document.getElementById(`join-qty-${prodKey}`);
+          const qty = parseFloat(qtyInput ? qtyInput.value : 0) || 0;
+          if (qty > 0) {
+            addedItems.push({ key: prodKey, product: prodName, qty: qty, unit: 'KG' });
+            addedKg += qty;
+          }
+        }
+      });
+
+      if (addedItems.length === 0 || addedKg <= 0) {
+        showToast('⚠️ Please select at least one product and enter quantity (KG).');
+        return;
+      }
+
+      // Merge into existing group items if same product, otherwise add as new item
+      addedItems.forEach(added => {
+        const catalogItem = JOIN_PRODUCE_CATALOG.find(c => c.key === added.key);
+        const existingItem = group.items.find(it => {
+          const lower = (it.product || '').toLowerCase();
+          return lower === added.product.toLowerCase() ||
+            (catalogItem && catalogItem.keywords.some(kw => lower.includes(kw)));
+        });
+
+        if (existingItem) {
+          existingItem.qty = (parseFloat(existingItem.qty) || 0) + added.qty;
+        } else {
+          group.items.push({ product: added.product, qty: added.qty, unit: 'KG' });
+        }
+      });
+
+      group.totalWeight = (parseFloat(group.totalWeight) || 0) + addedKg;
+      group.membersCount = (parseInt(group.membersCount, 10) || 1) + 1;
+      if (!Array.isArray(group.contributors)) group.contributors = [];
+      group.contributors.push({
+        name: memberName,
+        phone: memberPhone,
+        summary: addedItems.map(i => `${i.qty} KG ${i.product}`).join(', '),
+        joinedAt: 'Just now'
+      });
+
+      try {
+        localStorage.setItem('van_bazaar_collective_listings', JSON.stringify(activeListings));
+      } catch (err) {}
+
+      renderCollectiveListings();
+      renderLeaderDashboard();
+      if (joinGroupModal) joinGroupModal.classList.remove('active');
+
+      speakText(
+        `${memberName} जी, आप ${group.leaderName} के समूह में जुड़ गए हैं। कुल वजन ${group.totalWeight} किलो हो गया है।`,
+        `${memberName} ji, aap ${group.leaderName} ke group mein jud gaye hain. Total batch ${group.totalWeight} KG ho gaya hai.`
+      );
+      showToast(`🤝 Joined ${group.leaderName}! Added +${addedKg} KG (New Batch Total: ${group.totalWeight} KG).`);
+    });
+  }
+
   const renderCollectiveListings = () => {
     if (!collectiveListingsContainer) return;
     const filterQuery = searchListingsInput ? searchListingsInput.value.trim().toLowerCase() : '';
@@ -1453,6 +1663,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </span>
       `).join('');
 
+      const contributorsHtml = (Array.isArray(item.contributors) && item.contributors.length > 0)
+        ? `<div class="join-contributors-note">🤝 Joined by: ${item.contributors.map(c => `<strong>${c.name}</strong> (+${c.summary})`).join(' • ')}</div>`
+        : '';
+
       return `
         <div class="group-listing-card" data-listing-id="${item.id}">
           <div class="listing-top-row">
@@ -1463,7 +1677,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                ${item.location}
+                ${item.location} • 👥 ${item.membersCount || 1} Collector${(item.membersCount || 1) > 1 ? 's' : ''}
               </div>
             </div>
             <span class="listing-status-pill">${item.status}</span>
@@ -1472,6 +1686,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="listing-items-tags">
             ${itemsTags}
           </div>
+          ${contributorsHtml}
 
           <div class="listing-footer-bar">
             <div class="listing-weight-total">
@@ -1498,8 +1713,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.btn-join-group').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const leader = btn.getAttribute('data-name');
-        showToast(`🤝 Connected with ${leader}! Van Kendra aggregation request sent.`);
+        const groupId = btn.getAttribute('data-id');
+        openJoinGroupModal(groupId);
       });
     });
   };
