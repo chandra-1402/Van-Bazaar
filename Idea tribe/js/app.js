@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnVerifyOtpText = document.getElementById('btnVerifyOtpText');
   const smsBannerMsg = document.getElementById('smsBannerMsg');
   const otpErrorMsg = document.getElementById('otpErrorMsg');
+  const otpVisualBoxes = document.getElementById('otpVisualBoxes');
   const firebaseStatusIndicator = document.getElementById('firebaseStatusIndicator');
   const btnToggleFirebaseConfig = document.getElementById('btnToggleFirebaseConfig');
   const firebaseConfigDrawer = document.getElementById('firebaseConfigDrawer');
@@ -2357,6 +2358,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sync 6 visual digit boxes with the single input value
   const syncOtpBoxes = (val = '') => {
     const clean = String(val).replace(/[^0-9]/g, '').slice(0, 6);
+    const isFocused = document.activeElement === otpSingleInput;
+    const activeIndex = Math.min(clean.length, otpBoxes.length - 1);
+
+    if (otpVisualBoxes) otpVisualBoxes.classList.remove('error');
+
     for (let i = 0; i < otpBoxes.length; i++) {
       if (otpBoxes[i]) {
         if (i < clean.length) {
@@ -2366,6 +2372,7 @@ document.addEventListener('DOMContentLoaded', () => {
           otpBoxes[i].textContent = '-';
           otpBoxes[i].classList.remove('filled');
         }
+        otpBoxes[i].classList.toggle('active', isFocused && i === activeIndex);
       }
     }
   };
@@ -2374,14 +2381,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const showLoginStep1 = () => {
     if (loginStep1) loginStep1.style.display = 'block';
     if (loginStep2) loginStep2.style.display = 'none';
-    if (loginModalTitle) loginModalTitle.textContent = "Van Bazaar Portal Login (लॉगिन पोर्टल)";
+    if (loginModalTitle) loginModalTitle.textContent = "Van Bazaar Portal Login";
   };
 
   // Switch to Step 2 (OTP Dashboard)
   const showLoginStep2 = (phone, isRealFirebaseSms = false) => {
     if (loginStep1) loginStep1.style.display = 'none';
     if (loginStep2) loginStep2.style.display = 'block';
-    if (loginModalTitle) loginModalTitle.textContent = "🔑 OTP Verification Dashboard (ओटीपी सत्यापन)";
+    if (loginModalTitle) loginModalTitle.textContent = "OTP Verification (ओटीपी सत्यापन)";
 
     if (otpTargetPhoneDisplay) otpTargetPhoneDisplay.textContent = `+91 ${phone}`;
 
@@ -2529,6 +2536,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    otpSingleInput.addEventListener('focus', () => {
+      syncOtpBoxes(otpSingleInput.value);
+    });
+
+    otpSingleInput.addEventListener('blur', () => {
+      otpBoxes.forEach(box => { if (box) box.classList.remove('active'); });
+    });
+
     otpSingleInput.addEventListener('paste', (e) => {
       e.preventDefault();
       const pasteData = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '').slice(0, 6);
@@ -2625,13 +2640,13 @@ document.addEventListener('DOMContentLoaded', () => {
           otpErrorMsg.textContent = message;
           otpErrorMsg.style.display = 'block';
         }
-        if (otpSingleInput) {
-          otpSingleInput.style.borderColor = '#EF4444';
-          otpSingleInput.style.background = '#FEE2E2';
+        if (otpVisualBoxes) {
+          otpVisualBoxes.classList.add('error');
           setTimeout(() => {
-            otpSingleInput.style.borderColor = '';
-            otpSingleInput.style.background = '';
+            otpVisualBoxes.classList.remove('error');
           }, 2000);
+        }
+        if (otpSingleInput) {
           otpSingleInput.focus();
         }
       };

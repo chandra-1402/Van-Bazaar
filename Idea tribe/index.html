@@ -20,7 +20,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B6B2E'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12c0 3.5 1.8 6.6 4.6 8.4L12 22l5.4-1.6C20.2 18.6 22 15.5 22 12c0-5.5-4.5-10-10-10zm0 17.5l-4-1.2C5.8 17 4.5 14.6 4.5 12c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5c0 2.6-1.3 5-3.5 6.3l-4 1.2z'/%3E%3Cpath d='M12 6c-3.3 0-6 2.7-6 6 0 2.2 1.2 4.1 3 5.1V12h6v5.1c1.8-1 3-2.9 3-5.1 0-3.3-2.7-6-6-6z'/%3E%3C/svg%3E">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20260901_4">
+  <link rel="stylesheet" href="css/style.css?v=20261125_5">
 </head>
 <body>
 
@@ -1038,29 +1038,27 @@
             </div>
           </div>
 
-          <div style="text-align: center; margin-block: 0.75rem 0.5rem;">
-            <label class="calc-label" for="otpSingleInput" style="font-size: 1rem; margin-bottom: 0.25rem;">
+          <div style="text-align: center; margin-block: 0.5rem 0.25rem;">
+            <label class="calc-label" for="otpSingleInput" style="font-size: 0.96rem; margin-bottom: 0.2rem;">
               Enter 6-Digit Security OTP (ओटीपी यहाँ टाइप करें)
             </label>
-            <p style="font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.75rem;">
-              Type 6 digits received on your phone or click the keypad:
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.65rem;">
+              Type 6 digits on your keyboard or tap the keypad below:
             </p>
 
-            <!-- Single Unified Clean Input Box for Direct Typing -->
-            <div style="max-width: 280px; margin: 0 auto 0.75rem auto;">
-              <input type="text" id="otpSingleInput" class="otp-single-field" maxlength="6" placeholder="••••••" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" autofocus>
+            <!-- Unified 6-Digit OTP Box Input -->
+            <div class="otp-input-container" id="otpInputContainer">
+              <input type="text" id="otpSingleInput" class="otp-hidden-input" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" aria-label="Enter 6-digit OTP" autofocus>
+              <div class="otp-inputs-row" id="otpVisualBoxes">
+                <div class="otp-digit-box" id="otpBox1">-</div>
+                <div class="otp-digit-box" id="otpBox2">-</div>
+                <div class="otp-digit-box" id="otpBox3">-</div>
+                <div class="otp-digit-box" id="otpBox4">-</div>
+                <div class="otp-digit-box" id="otpBox5">-</div>
+                <div class="otp-digit-box" id="otpBox6">-</div>
+              </div>
             </div>
-
-            <!-- 6 Synced Visual Digit Boxes -->
-            <div class="otp-inputs-row" id="otpVisualBoxes">
-              <div class="otp-digit-box" id="otpBox1">-</div>
-              <div class="otp-digit-box" id="otpBox2">-</div>
-              <div class="otp-digit-box" id="otpBox3">-</div>
-              <div class="otp-digit-box" id="otpBox4">-</div>
-              <div class="otp-digit-box" id="otpBox5">-</div>
-              <div class="otp-digit-box" id="otpBox6">-</div>
-            </div>
-            <p id="otpErrorMsg" style="display: none; color: #DC2626; font-size: 0.84rem; font-weight: 600; margin: -0.5rem 0 0.75rem 0;"></p>
+            <p id="otpErrorMsg" style="display: none; color: #DC2626; font-size: 0.82rem; font-weight: 600; margin: 0.2rem 0 0.5rem 0;"></p>
           </div>
 
           <!-- Touch Keypad (For mouse click / touch screen users) -->
@@ -1415,6 +1413,6 @@
   <script src="js/firebase-config.js?v=20261026_1"></script>
   <!-- App Scripts -->
   <script src="js/data.js?v=20260901_4"></script>
-  <script src="js/app.js?v=20260901_4"></script>
+  <script src="js/app.js?v=20261125_5"></script>
 </body>
 </html>

@@ -2122,9 +2122,11 @@ button, input, select, textarea {
   background: var(--white);
   border-radius: 24px;
   width: 100%;
-  max-width: 560px;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-width: 520px;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   position: relative;
   transform: scale(0.92) translateY(20px);
@@ -2136,28 +2138,29 @@ button, input, select, textarea {
 }
 
 .modal-header {
-  padding: 1.5rem 1.75rem;
+  padding: 1.15rem 1.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
+  gap: 0.75rem;
   background: var(--white);
+  flex-shrink: 0;
   z-index: 10;
 }
 
 .modal-header h3 {
-  font-size: 1.3rem;
+  font-size: 1.18rem;
   color: var(--dark-green);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  line-height: 1.3;
 }
 
 .btn-close-modal {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: #F1F5F9;
   border: none;
@@ -2165,6 +2168,7 @@ button, input, select, textarea {
   display: grid;
   place-items: center;
   color: var(--text-muted);
+  flex-shrink: 0;
   transition: background var(--transition-fast), color var(--transition-fast);
 }
 
@@ -2174,7 +2178,24 @@ button, input, select, textarea {
 }
 
 .modal-body {
-  padding: 1.75rem;
+  padding: 1.35rem 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E1 transparent;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 999px;
 }
 
 /* Voice Assistant Visualizer Modal */
@@ -2646,9 +2667,9 @@ button, input, select, textarea {
   justify-content: space-between;
   background: #F1F5F9;
   border-radius: 12px;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  padding: 0.65rem 0.95rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
 }
 
 .btn-edit-phone {
@@ -2663,32 +2684,33 @@ button, input, select, textarea {
 
 .simulated-sms-banner {
   background: linear-gradient(135deg, #FEF3C7, #FDE68A);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  border-radius: 14px;
-  padding: 0.85rem 1rem;
-  margin-bottom: 1.25rem;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 12px;
+  padding: 0.7rem 0.95rem;
+  margin-bottom: 0.85rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.75rem;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
 }
 
 .sms-banner-text {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: #92400E;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .sms-otp-code {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: #78350F;
-  letter-spacing: 2px;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 2px 8px;
+  letter-spacing: 2.5px;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 2px 9px;
   border-radius: 6px;
   margin-inline: 4px;
+  display: inline-block;
 }
 
 .btn-autofill-otp {
@@ -2708,38 +2730,36 @@ button, input, select, textarea {
   background: #B45309;
 }
 
-.otp-single-field {
-  width: 100%;
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: 18px;
-  text-align: center;
-  color: var(--dark-green);
-  background: var(--white);
-  border: 2px solid var(--primary);
-  border-radius: 14px;
-  padding: 0.5rem 1rem;
-  box-shadow: 0 4px 14px rgba(11, 107, 46, 0.15);
-  transition: all var(--transition-fast);
+.otp-input-container {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0.25rem auto 0.5rem auto;
 }
 
-.otp-single-field:focus {
-  border-color: #047857;
-  box-shadow: 0 0 0 4px rgba(11, 107, 46, 0.25);
-  outline: none;
+.otp-hidden-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: text;
+  z-index: 2;
+  border: 0;
+  background: transparent;
 }
 
 .otp-inputs-row {
   display: flex;
   justify-content: center;
-  gap: 0.45rem;
-  margin-block: 0.5rem 1.25rem;
+  gap: 0.5rem;
+  margin-block: 0;
 }
 
 .otp-digit-box {
-  width: 44px;
+  width: 48px;
   height: 52px;
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 800;
   display: grid;
   place-items: center;
@@ -2749,6 +2769,18 @@ button, input, select, textarea {
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.otp-digit-box.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(11, 107, 46, 0.18);
+}
+
+.otp-inputs-row.error .otp-digit-box {
+  border-color: #EF4444;
+  background: #FEF2F2;
+  color: #B91C1C;
 }
 
 .firebase-status-bar {
@@ -2789,8 +2821,8 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
-  font-size: 0.85rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
 }
 
@@ -2802,22 +2834,22 @@ button, input, select, textarea {
   cursor: pointer;
   text-decoration: underline;
   padding: 0;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
 }
 
 .otp-keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  margin-block: 1rem;
+  gap: 0.45rem;
+  margin-block: 0.65rem 0.75rem;
 }
 
 .otp-key-btn {
-  padding: 0.75rem;
+  padding: 0.55rem;
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  font-size: 1.25rem;
+  border-radius: 10px;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-main);
   cursor: pointer;
@@ -3205,5 +3237,13 @@ button, input, select, textarea {
   }
   .hub-form-actions {
     flex-direction: column;
+  }
+  .otp-digit-box {
+    width: 40px;
+    height: 46px;
+    font-size: 1.25rem;
+  }
+  .modal-body {
+    padding: 1.15rem;
   }
 }
