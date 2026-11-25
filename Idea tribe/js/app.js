@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSendOtpText = document.getElementById('btnSendOtpText');
   const btnVerifyOtpText = document.getElementById('btnVerifyOtpText');
   const smsBannerMsg = document.getElementById('smsBannerMsg');
+  const otpErrorMsg = document.getElementById('otpErrorMsg');
   const firebaseStatusIndicator = document.getElementById('firebaseStatusIndicator');
   const btnToggleFirebaseConfig = document.getElementById('btnToggleFirebaseConfig');
   const firebaseConfigDrawer = document.getElementById('firebaseConfigDrawer');
@@ -2385,19 +2386,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (otpTargetPhoneDisplay) otpTargetPhoneDisplay.textContent = `+91 ${phone}`;
 
     if (smsBannerMsg) {
-      smsBannerMsg.innerHTML = `📲 <strong>SMS Sent:</strong> A 6-digit security code has been dispatched to <strong style="color: var(--dark-green);">+91 ${phone}</strong>. Please check your mobile phone SMS.`;
+      if (isRealFirebaseSms) {
+        smsBannerMsg.innerHTML = `📲 <strong>SMS Sent:</strong> A 6-digit security code has been dispatched to <strong style="color: var(--dark-green);">+91 ${phone}</strong>. Please check your mobile phone SMS.`;
+      } else {
+        smsBannerMsg.innerHTML = `📲 <strong>Your OTP Code:</strong> <span class="sms-otp-code" id="generatedOtpBadge">${currentGeneratedOtp}</span> <span style="display:block; margin-top:4px;">Enter this 6-digit security code below to verify <strong style="color: var(--dark-green);">+91 ${phone}</strong>.</span>`;
+      }
     }
     if (btnAutoFillOtp) btnAutoFillOtp.style.display = 'none';
+    if (otpErrorMsg) {
+      otpErrorMsg.style.display = 'none';
+      otpErrorMsg.textContent = '';
+    }
 
     // Reset OTP single input and visual boxes
     if (otpSingleInput) {
       otpSingleInput.value = '';
+      otpSingleInput.style.borderColor = '';
+      otpSingleInput.style.background = '';
       setTimeout(() => otpSingleInput.focus(), 150);
     }
     syncOtpBoxes('');
 
     startOtpCountdown(30);
-    showToast(`📲 Security code sent to +91 ${phone}! Check your SMS.`);
+    showToast(isRealFirebaseSms
+      ? `📲 Security code sent to +91 ${phone}! Check your SMS.`
+      : `📲 Your OTP for +91 ${phone} is ${currentGeneratedOtp}`
+    );
   };
 
   // Open Login Modal
@@ -2505,6 +2519,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const clean = e.target.value.replace(/[^0-9]/g, '').slice(0, 6);
       e.target.value = clean;
       syncOtpBoxes(clean);
+      if (otpErrorMsg) otpErrorMsg.style.display = 'none';
     });
 
     otpSingleInput.addEventListener('keydown', (e) => {
@@ -2519,6 +2534,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pasteData = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '').slice(0, 6);
       otpSingleInput.value = pasteData;
       syncOtpBoxes(pasteData);
+      if (otpErrorMsg) otpErrorMsg.style.display = 'none';
     });
   }
 
@@ -2529,6 +2545,7 @@ document.addEventListener('DOMContentLoaded', () => {
         otpSingleInput.value = currentGeneratedOtp;
         syncOtpBoxes(currentGeneratedOtp);
       }
+      if (otpErrorMsg) otpErrorMsg.style.display = 'none';
       showToast(`⚡ OTP Code ${currentGeneratedOtp} auto-filled!`);
       if (btnVerifyOtpSubmit) btnVerifyOtpSubmit.focus();
     });
@@ -2546,16 +2563,19 @@ document.addEventListener('DOMContentLoaded', () => {
           currentVal += digit;
           if (otpSingleInput) otpSingleInput.value = currentVal;
           syncOtpBoxes(currentVal);
+          if (otpErrorMsg) otpErrorMsg.style.display = 'none';
         }
       } else if (action === 'clear') {
         if (otpSingleInput) otpSingleInput.value = '';
         syncOtpBoxes('');
+        if (otpErrorMsg) otpErrorMsg.style.display = 'none';
         if (otpSingleInput) otpSingleInput.focus();
       } else if (action === 'backspace') {
         if (currentVal.length > 0) {
           currentVal = currentVal.slice(0, -1);
           if (otpSingleInput) otpSingleInput.value = currentVal;
           syncOtpBoxes(currentVal);
+          if (otpErrorMsg) otpErrorMsg.style.display = 'none';
         }
       }
     });
@@ -2569,15 +2589,20 @@ document.addEventListener('DOMContentLoaded', () => {
         handleSendOtp();
       } else {
         currentGeneratedOtp = String(Math.floor(100000 + Math.random() * 900000));
-        if (generatedOtpBadge) generatedOtpBadge.textContent = currentGeneratedOtp;
+        const phoneDisplay = pendingLoginProfile.phone || '';
+        if (smsBannerMsg) {
+          smsBannerMsg.innerHTML = `📲 <strong>Your OTP Code:</strong> <span class="sms-otp-code" id="generatedOtpBadge">${currentGeneratedOtp}</span> <span style="display:block; margin-top:4px;">New 6-digit security code generated for <strong style="color: var(--dark-green);">${phoneDisplay}</strong>.</span>`;
+        }
         if (btnAutoFillOtp) btnAutoFillOtp.textContent = `⚡ Auto-Fill (${currentGeneratedOtp})`;
+        if (otpErrorMsg) otpErrorMsg.style.display = 'none';
         if (otpSingleInput) {
           otpSingleInput.value = '';
           syncOtpBoxes('');
+          otpSingleInput.focus();
         }
         startOtpCountdown(30);
-        showToast(`🔄 New verification code sent to your phone!`);
-        speakText(`नया ओटीपी आपके मोबाइल नंबर पर भेजा गया है।`, `Naya OTP aapke mobile number par bheja gaya hai.`, `A new verification code was sent to your phone.`);
+        showToast(`🔄 New OTP generated: ${currentGeneratedOtp}`);
+        speakText(`नया ओटीपी स्क्रीन पर दिखाया गया है।`, `Naya OTP screen par dikhaya gaya hai.`, `A new verification code is shown on screen.`);
       }
     });
   }
@@ -2594,13 +2619,25 @@ document.addEventListener('DOMContentLoaded', () => {
     btnVerifyOtpSubmit.addEventListener('click', async () => {
       const enteredOtp = otpSingleInput ? otpSingleInput.value.trim() : '';
 
-      if (enteredOtp.length < 4) {
-        showToast('⚠️ Please enter the complete verification code.');
+      const showOtpError = (message) => {
+        showToast(message);
+        if (otpErrorMsg) {
+          otpErrorMsg.textContent = message;
+          otpErrorMsg.style.display = 'block';
+        }
         if (otpSingleInput) {
           otpSingleInput.style.borderColor = '#EF4444';
-          setTimeout(() => { otpSingleInput.style.borderColor = ''; }, 1500);
+          otpSingleInput.style.background = '#FEE2E2';
+          setTimeout(() => {
+            otpSingleInput.style.borderColor = '';
+            otpSingleInput.style.background = '';
+          }, 2000);
           otpSingleInput.focus();
         }
+      };
+
+      if (enteredOtp.length !== 6) {
+        showOtpError('⚠️ Please enter the complete 6-digit OTP code.');
         return;
       }
 
@@ -2608,6 +2645,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnVerifyOtpSubmit) btnVerifyOtpSubmit.disabled = true;
 
       const completeLogin = (authMethodName) => {
+        if (otpErrorMsg) otpErrorMsg.style.display = 'none';
         const userObj = {
           name: pendingLoginProfile.name || "Sunita Munda",
           phone: pendingLoginProfile.phone || "+91 94311 88201",
@@ -2650,37 +2688,21 @@ document.addEventListener('DOMContentLoaded', () => {
           if (btnVerifyOtpText) btnVerifyOtpText.textContent = 'Verify & Login to Portal (सत्यापित करें)';
           if (btnVerifyOtpSubmit) btnVerifyOtpSubmit.disabled = false;
 
-          showToast('❌ Invalid SMS OTP. The code entered does not match the SMS sent to your phone.');
-          if (otpSingleInput) {
-            otpSingleInput.style.borderColor = '#EF4444';
-            otpSingleInput.style.background = '#FEE2E2';
-            setTimeout(() => {
-              otpSingleInput.style.borderColor = '';
-              otpSingleInput.style.background = '';
-            }, 2000);
-            otpSingleInput.focus();
-          }
+          showOtpError('❌ Invalid SMS OTP. The code entered does not match the SMS sent to your phone.');
+          speakText('गलत ओटीपी कोड। कृपया सही ओटीपी दर्ज करें।', 'Galat OTP code. Kripya sahi OTP darj karein.', 'Incorrect OTP code. Please try again.');
           return;
         }
       }
 
-      // 2. Local Demo / Preview Verification (Accepts any 6 digits or standard test code 123456)
-      if (enteredOtp.length === 6 || enteredOtp === currentGeneratedOtp || enteredOtp === '123456' || enteredOtp === '1234' || enteredOtp === '4829') {
+      // 2. Strict Verification against the generated OTP shown on screen
+      if (enteredOtp === currentGeneratedOtp) {
         completeLogin("Phone OTP Verified");
       } else {
         if (btnVerifyOtpText) btnVerifyOtpText.textContent = 'Verify & Login to Portal (सत्यापित करें)';
         if (btnVerifyOtpSubmit) btnVerifyOtpSubmit.disabled = false;
 
-        showToast('❌ Incorrect OTP code. Please enter the 6-digit code received on your phone.');
-        if (otpSingleInput) {
-          otpSingleInput.style.borderColor = '#EF4444';
-          otpSingleInput.style.background = '#FEE2E2';
-          setTimeout(() => {
-            otpSingleInput.style.borderColor = '';
-            otpSingleInput.style.background = '';
-          }, 2000);
-          otpSingleInput.focus();
-        }
+        showOtpError('❌ Incorrect OTP! Please enter the exact 6-digit OTP shown above to login.');
+        speakText('गलत ओटीपी कोड। लॉगिन अस्वीकृत।', 'Galat OTP code. Login rejected.', 'Incorrect OTP code. Login rejected.');
       }
     });
   }
