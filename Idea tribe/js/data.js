@@ -182,7 +182,15 @@ const VAN_BAZAAR_DATA = {
       estValue: 13070,
       membersCount: 6,
       createdAt: "Today, 10:15 AM",
-      status: "Looking for 2 more collectors"
+      status: "Looking for 2 more collectors",
+      collectors: [
+        { name: "Sunita Munda (सुनीता मुंडा)", phone: "9431188201", role: "Group Leader", items: [{ product: "Mahua Flowers", qty: 60, unit: "KG" }, { product: "Wild Tamarind", qty: 30, unit: "KG" }], totalKg: 90, joinedAt: "Today, 10:15 AM" },
+        { name: "Fulmani Devi", phone: "9431188214", role: "Member", items: [{ product: "Mahua Flowers", qty: 45, unit: "KG" }, { product: "Wild Tamarind", qty: 25, unit: "KG" }], totalKg: 70, joinedAt: "Today, 10:25 AM" },
+        { name: "Budhni Oraon", phone: "9431188229", role: "Member", items: [{ product: "Mahua Flowers", qty: 50, unit: "KG" }, { product: "Wild Tamarind", qty: 20, unit: "KG" }], totalKg: 70, joinedAt: "Today, 10:40 AM" },
+        { name: "Mangri Munda", phone: "9431188235", role: "Member", items: [{ product: "Mahua Flowers", qty: 35, unit: "KG" }, { product: "Wild Tamarind", qty: 25, unit: "KG" }], totalKg: 60, joinedAt: "Today, 11:00 AM" },
+        { name: "Lakshmi Kumari", phone: "9431188248", role: "Member", items: [{ product: "Mahua Flowers", qty: 35, unit: "KG" }], totalKg: 35, joinedAt: "Today, 11:12 AM" },
+        { name: "Anita Tirkey", phone: "9431188261", role: "Member", items: [{ product: "Mahua Flowers", qty: 25, unit: "KG" }, { product: "Wild Tamarind", qty: 20, unit: "KG" }], totalKg: 45, joinedAt: "Today, 11:30 AM" }
+      ]
     },
     {
       id: "grp-002",
@@ -198,7 +206,13 @@ const VAN_BAZAAR_DATA = {
       estValue: 27075,
       membersCount: 4,
       createdAt: "Today, 09:30 AM",
-      status: "Ready to aggregate at Van Kendra"
+      status: "Ready to aggregate at Van Kendra",
+      collectors: [
+        { name: "Birbaha Hansda (बीरबाहा हांसदा)", phone: "9431366420", role: "Group Leader", items: [{ product: "Kusmi Lac (लाह)", qty: 20, unit: "KG" }, { product: "Wild Forest Honey", qty: 10, unit: "KG" }], totalKg: 30, joinedAt: "Today, 09:30 AM" },
+        { name: "Saloni Murmu", phone: "9431366431", role: "Member", items: [{ product: "Kusmi Lac (लाह)", qty: 15, unit: "KG" }, { product: "Wild Forest Honey", qty: 10, unit: "KG" }], totalKg: 25, joinedAt: "Today, 09:45 AM" },
+        { name: "Rani Soren", phone: "9431366445", role: "Member", items: [{ product: "Kusmi Lac (लाह)", qty: 15, unit: "KG" }, { product: "Wild Forest Honey", qty: 8, unit: "KG" }], totalKg: 23, joinedAt: "Today, 10:05 AM" },
+        { name: "Malti Tudu", phone: "9431366459", role: "Member", items: [{ product: "Kusmi Lac (लाह)", qty: 10, unit: "KG" }, { product: "Wild Forest Honey", qty: 7, unit: "KG" }], totalKg: 17, joinedAt: "Today, 10:20 AM" }
+      ]
     },
     {
       id: "grp-003",
@@ -214,7 +228,17 @@ const VAN_BAZAAR_DATA = {
       estValue: 11500,
       membersCount: 8,
       createdAt: "Yesterday, 04:45 PM",
-      status: "Transport Vehicle Booked for Tomorrow"
+      status: "Transport Vehicle Booked for Tomorrow",
+      collectors: [
+        { name: "Parvati Devi (पार्वती देवी)", phone: "9431177312", role: "Group Leader", items: [{ product: "Sal Seeds", qty: 80, unit: "KG" }, { product: "Harra / Haritaki", qty: 30, unit: "KG" }], totalKg: 110, joinedAt: "Yesterday, 04:45 PM" },
+        { name: "Geeta Munda", phone: "9431177320", role: "Member", items: [{ product: "Sal Seeds", qty: 60, unit: "KG" }, { product: "Harra / Haritaki", qty: 25, unit: "KG" }], totalKg: 85, joinedAt: "Yesterday, 05:00 PM" },
+        { name: "Shanti Devi", phone: "9431177333", role: "Member", items: [{ product: "Sal Seeds", qty: 55, unit: "KG" }, { product: "Harra / Haritaki", qty: 20, unit: "KG" }], totalKg: 75, joinedAt: "Yesterday, 05:15 PM" },
+        { name: "Pushpa Kerketta", phone: "9431177341", role: "Member", items: [{ product: "Sal Seeds", qty: 50, unit: "KG" }, { product: "Harra / Haritaki", qty: 20, unit: "KG" }], totalKg: 70, joinedAt: "Yesterday, 05:30 PM" },
+        { name: "Kamla Toppo", phone: "9431177355", role: "Member", items: [{ product: "Sal Seeds", qty: 45, unit: "KG" }, { product: "Harra / Haritaki", qty: 15, unit: "KG" }], totalKg: 60, joinedAt: "Yesterday, 05:45 PM" },
+        { name: "Rekha Oraon", phone: "9431177362", role: "Member", items: [{ product: "Sal Seeds", qty: 40, unit: "KG" }, { product: "Harra / Haritaki", qty: 15, unit: "KG" }], totalKg: 55, joinedAt: "Yesterday, 06:00 PM" },
+        { name: "Sumitra Minz", phone: "9431177378", role: "Member", items: [{ product: "Sal Seeds", qty: 40, unit: "KG" }, { product: "Harra / Haritaki", qty: 15, unit: "KG" }], totalKg: 55, joinedAt: "Yesterday, 06:15 PM" },
+        { name: "Mamta Ekka", phone: "9431177389", role: "Member", items: [{ product: "Sal Seeds", qty: 30, unit: "KG" }, { product: "Harra / Haritaki", qty: 10, unit: "KG" }], totalKg: 40, joinedAt: "Yesterday, 06:30 PM" }
+      ]
     }
   ],
 

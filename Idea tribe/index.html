@@ -20,7 +20,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B6B2E'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12c0 3.5 1.8 6.6 4.6 8.4L12 22l5.4-1.6C20.2 18.6 22 15.5 22 12c0-5.5-4.5-10-10-10zm0 17.5l-4-1.2C5.8 17 4.5 14.6 4.5 12c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5c0 2.6-1.3 5-3.5 6.3l-4 1.2z'/%3E%3Cpath d='M12 6c-3.3 0-6 2.7-6 6 0 2.2 1.2 4.1 3 5.1V12h6v5.1c1.8-1 3-2.9 3-5.1 0-3.3-2.7-6-6-6z'/%3E%3C/svg%3E">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20261125_8">
+  <link rel="stylesheet" href="css/style.css?v=20261126_11">
 </head>
 <body>
 
@@ -1400,7 +1400,7 @@
 
   <!-- 7. Join Collective Selling Group Modal -->
   <div class="modal-overlay" id="joinGroupModal" role="dialog" aria-modal="true">
-    <div class="modal-card">
+    <div class="modal-card join-modal-card">
       <div class="modal-header">
         <h3>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
@@ -1414,51 +1414,70 @@
         <button class="btn-close-modal" id="btnCloseJoinGroupModal" aria-label="Close Join Group Modal">&times;</button>
       </div>
       <div class="modal-body">
-        <div class="join-group-summary">
-          <div class="join-summary-top">
-            <div>
-              <span style="font-size: 0.76rem; color: var(--text-light); display: block;">Joining Collector Group</span>
-              <strong id="joinGroupLeaderName" style="color: var(--dark-green); font-size: 1rem;">—</strong>
-              <span id="joinGroupLocation" style="font-size: 0.8rem; color: var(--text-muted); display: block;">—</span>
+        <div class="join-modal-grid">
+          <!-- Column 1: Group Summary & Collectors List -->
+          <div class="join-modal-left">
+            <div class="join-group-summary">
+              <div class="join-summary-top">
+                <div>
+                  <span style="font-size: 0.76rem; color: var(--text-light); display: block;">Joining Collector Group</span>
+                  <strong id="joinGroupLeaderName" style="color: var(--dark-green); font-size: 1rem;">—</strong>
+                  <span id="joinGroupLocation" style="font-size: 0.8rem; color: var(--text-muted); display: block;">—</span>
+                </div>
+                <span class="join-current-total-pill" id="joinGroupCurrentTotal">0 KG</span>
+              </div>
+              <div class="listing-items-tags" id="joinGroupCurrentTags" style="margin-block: 0.5rem 0;"></div>
             </div>
-            <span class="join-current-total-pill" id="joinGroupCurrentTotal">0 KG</span>
+
+            <!-- Collectors & Product Quantities List -->
+            <div class="join-collectors-section">
+              <div class="join-collectors-header">
+                <span>👥 Collectors in This Group</span>
+                <span class="join-collectors-count-badge" id="joinGroupCollectorsCount">0 Collectors</span>
+              </div>
+              <div class="join-collectors-list" id="joinGroupCollectorsList">
+                <!-- Dynamically Populated -->
+              </div>
+            </div>
           </div>
-          <div class="listing-items-tags" id="joinGroupCurrentTags" style="margin-block: 0.5rem 0;"></div>
+
+          <!-- Column 2: Join & Add Your Produce Form -->
+          <div class="join-modal-right">
+            <form id="joinGroupForm">
+              <div class="form-row-2" style="margin-bottom: 0.85rem;">
+                <div class="form-group-item">
+                  <label for="joinMemberName">Your Name (आपका नाम) *</label>
+                  <input type="text" class="form-input-control" id="joinMemberName" placeholder="e.g. Priya Devi" required>
+                </div>
+                <div class="form-group-item">
+                  <label for="joinMemberPhone">Mobile Number (मोबाइल) *</label>
+                  <input type="tel" class="form-input-control" id="joinMemberPhone" placeholder="e.g. 9431X XXXXX" required>
+                </div>
+              </div>
+
+              <div class="produce-select-box" style="margin-bottom: 0.9rem; padding: 0.95rem;">
+                <div class="produce-select-title">
+                  <span>Select Produce &amp; Enter Quantity (KG):</span>
+                  <span style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">(Choose all that apply)</span>
+                </div>
+
+                <div class="checkbox-items-list" id="joinProduceList">
+                  <!-- Populated dynamically with group's matching products first -->
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.8rem; padding-top: 0.65rem; border-top: 1px dashed rgba(11,107,46,0.2); font-size: 0.84rem; gap: 0.5rem; flex-wrap: wrap;">
+                  <span>Your Qty: <strong id="joinAddedWeight" style="color: var(--primary);">0 KG</strong></span>
+                  <span>New Group Total: <strong id="joinNewTotalWeight" style="color: var(--dark-green);">0 KG</strong></span>
+                  <span>Est. MSP: <strong id="joinAddedValue" style="color: var(--primary);">₹0</strong></span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" id="btnConfirmJoinGroup" style="width: 100%;">
+                <span>🤝 Add My Produce &amp; Join Group</span>
+              </button>
+            </form>
+          </div>
         </div>
-
-        <form id="joinGroupForm">
-          <div class="form-row-2" style="margin-bottom: 0.85rem;">
-            <div class="form-group-item">
-              <label for="joinMemberName">Your Name (आपका नाम) *</label>
-              <input type="text" class="form-input-control" id="joinMemberName" placeholder="e.g. Priya Devi" required>
-            </div>
-            <div class="form-group-item">
-              <label for="joinMemberPhone">Mobile Number (मोबाइल) *</label>
-              <input type="tel" class="form-input-control" id="joinMemberPhone" placeholder="e.g. 9431X XXXXX" required>
-            </div>
-          </div>
-
-          <div class="produce-select-box" style="margin-bottom: 1rem; padding: 1rem;">
-            <div class="produce-select-title">
-              <span>Select Produce &amp; Enter Quantity (KG):</span>
-              <span style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">(Choose all that apply)</span>
-            </div>
-
-            <div class="checkbox-items-list" id="joinProduceList">
-              <!-- Populated dynamically with group's matching products first -->
-            </div>
-
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.85rem; padding-top: 0.7rem; border-top: 1px dashed rgba(11,107,46,0.2); font-size: 0.84rem; gap: 0.5rem; flex-wrap: wrap;">
-              <span>Your Qty: <strong id="joinAddedWeight" style="color: var(--primary);">0 KG</strong></span>
-              <span>New Group Total: <strong id="joinNewTotalWeight" style="color: var(--dark-green);">0 KG</strong></span>
-              <span>Est. MSP: <strong id="joinAddedValue" style="color: var(--primary);">₹0</strong></span>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-lg" id="btnConfirmJoinGroup" style="width: 100%;">
-            <span>🤝 Add My Produce &amp; Join Group</span>
-          </button>
-        </form>
       </div>
     </div>
   </div>
@@ -1477,7 +1496,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js?v=20261026_1"></script>
   <!-- App Scripts -->
-  <script src="js/data.js?v=20260901_4"></script>
-  <script src="js/app.js?v=20261125_8"></script>
+  <script src="js/data.js?v=20261126_9"></script>
+  <script src="js/app.js?v=20261126_9"></script>
 </body>
 </html>

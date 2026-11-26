@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const joinGroupLocation = document.getElementById('joinGroupLocation');
   const joinGroupCurrentTotal = document.getElementById('joinGroupCurrentTotal');
   const joinGroupCurrentTags = document.getElementById('joinGroupCurrentTags');
+  const joinGroupCollectorsCount = document.getElementById('joinGroupCollectorsCount');
+  const joinGroupCollectorsList = document.getElementById('joinGroupCollectorsList');
   const joinMemberName = document.getElementById('joinMemberName');
   const joinMemberPhone = document.getElementById('joinMemberPhone');
   const joinProduceList = document.getElementById('joinProduceList');
@@ -1453,6 +1455,84 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  const getGroupCollectors = (group) => {
+    if (!group) return [];
+    if (Array.isArray(group.collectors) && group.collectors.length > 0) {
+      return group.collectors;
+    }
+
+    const seedMatch = VAN_BAZAAR_DATA.initialCollectiveListings.find(s => String(s.id) === String(group.id));
+    let baseCollectors = [];
+    if (seedMatch && Array.isArray(seedMatch.collectors)) {
+      baseCollectors = seedMatch.collectors.map(c => ({
+        ...c,
+        items: Array.isArray(c.items) ? c.items.map(it => ({ ...it })) : []
+      }));
+    } else {
+      const baseItems = Array.isArray(group.items) ? group.items.map(it => ({ ...it })) : [];
+      const baseTotal = baseItems.reduce((sum, it) => sum + (parseFloat(it.qty) || 0), 0);
+      baseCollectors = [{
+        name: group.leaderName,
+        phone: group.phone,
+        role: 'Group Leader',
+        items: baseItems,
+        totalKg: baseTotal || (parseFloat(group.totalWeight) || 0),
+        joinedAt: group.createdAt || 'Active'
+      }];
+    }
+
+    if (Array.isArray(group.contributors) && group.contributors.length > 0) {
+      group.contributors.forEach(c => {
+        baseCollectors.push({
+          name: c.name,
+          phone: c.phone || '',
+          role: 'Joined Member',
+          items: Array.isArray(c.items) ? c.items : [],
+          summary: c.summary || '',
+          totalKg: parseFloat(c.totalKg) || 0,
+          joinedAt: c.joinedAt || 'Just now'
+        });
+      });
+    }
+
+    return baseCollectors;
+  };
+
+  const renderJoinCollectorsList = (group) => {
+    const collectors = getGroupCollectors(group);
+    const totalCollectors = Math.max(collectors.length, parseInt(group.membersCount, 10) || 1);
+
+    if (joinGroupCollectorsCount) {
+      joinGroupCollectorsCount.textContent = `${totalCollectors} Collector${totalCollectors > 1 ? 's' : ''}`;
+    }
+    if (!joinGroupCollectorsList) return;
+
+    joinGroupCollectorsList.innerHTML = collectors.map((col, idx) => {
+      const isLeader = idx === 0 || (col.role && col.role.toLowerCase().includes('leader'));
+      const itemPills = (Array.isArray(col.items) && col.items.length > 0)
+        ? col.items.map(it => `<span class="join-collector-item-pill">🌱 ${it.product}: <strong>${it.qty} ${it.unit || 'KG'}</strong></span>`).join('')
+        : (col.summary ? `<span class="join-collector-item-pill">🌱 ${col.summary}</span>` : '');
+
+      const computedTotal = col.totalKg || (Array.isArray(col.items)
+        ? col.items.reduce((s, it) => s + (parseFloat(it.qty) || 0), 0)
+        : 0);
+
+      return `
+        <div class="join-collector-row">
+          <div class="join-collector-top">
+            <div class="join-collector-identity">
+              <span class="join-collector-num">${idx + 1}</span>
+              <strong style="color: var(--text-main);">${col.name}</strong>
+              <span class="join-collector-role ${isLeader ? '' : 'member'}">${isLeader ? 'Group Leader' : 'Member'}</span>
+            </div>
+            <span class="join-collector-total">${computedTotal ? `${computedTotal} KG` : ''}</span>
+          </div>
+          ${itemPills ? `<div class="join-collector-items">${itemPills}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+  };
+
   const updateJoinGroupEstimate = () => {
     const group = activeListings.find(g => String(g.id) === String(activeJoinGroupId));
     const currentTotal = group ? (parseFloat(group.totalWeight) || 0) : 0;
@@ -1498,6 +1578,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="produce-qty-tag">🌱 ${it.product}: <strong>${it.qty} ${it.unit}</strong></span>
       `).join('');
     }
+    renderJoinCollectorsList(group);
 
     if (joinMemberName) {
       joinMemberName.value = (currentLoggedUser && currentLoggedUser.name) ? currentLoggedUser.name : '';
@@ -1605,11 +1686,24 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       group.totalWeight = (parseFloat(group.totalWeight) || 0) + addedKg;
-      group.membersCount = (parseInt(group.membersCount, 10) || 1) + 1;
+      const existingCollectors = getGroupCollectors(group);
+      existingCollectors.push({
+        name: memberName,
+        phone: memberPhone,
+        role: 'Member',
+        items: addedItems.map(i => ({ product: i.product, qty: i.qty, unit: i.unit })),
+        totalKg: addedKg,
+        joinedAt: 'Just now'
+      });
+      group.collectors = existingCollectors;
+      group.membersCount = existingCollectors.length;
+
       if (!Array.isArray(group.contributors)) group.contributors = [];
       group.contributors.push({
         name: memberName,
         phone: memberPhone,
+        items: addedItems.map(i => ({ product: i.product, qty: i.qty, unit: i.unit })),
+        totalKg: addedKg,
         summary: addedItems.map(i => `${i.qty} KG ${i.product}`).join(', '),
         joinedAt: 'Just now'
       });
@@ -1768,7 +1862,17 @@ document.addEventListener('DOMContentLoaded', () => {
         totalWeight: totalBatchKg,
         membersCount: 1,
         createdAt: "Just now",
-        status: "Open for Nearby Collectors"
+        status: "Open for Nearby Collectors",
+        collectors: [
+          {
+            name: shg ? `${name} (${shg})` : name,
+            phone: phone,
+            role: "Group Leader",
+            items: selectedItems.map(it => ({ ...it })),
+            totalKg: totalBatchKg,
+            joinedAt: "Just now"
+          }
+        ]
       };
 
       activeListings.unshift(newListing);

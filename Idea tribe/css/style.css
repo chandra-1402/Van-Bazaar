@@ -1340,12 +1340,56 @@ button, input, select, textarea {
 }
 
 /* Join Collective Group Modal & Contributors */
+.modal-card.join-modal-card {
+  max-width: 1120px;
+  width: 95vw;
+  max-height: 92vh;
+}
+
+.join-modal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.join-modal-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.join-modal-right {
+  background: var(--light-green-subtle);
+  border: 1px solid rgba(11, 107, 46, 0.14);
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem;
+  min-width: 0;
+}
+
+.join-modal-right .form-row-2 {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.join-modal-right .form-group-item {
+  min-width: 0;
+}
+
+.join-modal-right .checkbox-items-list {
+  gap: 0.55rem;
+}
+
+.join-modal-right .produce-check-row {
+  padding: 0.5rem 0.8rem;
+}
+
 .join-group-summary {
   background: var(--light-green-subtle);
   border: 1px solid rgba(11, 107, 46, 0.18);
   border-radius: 14px;
   padding: 0.85rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .join-summary-top {
@@ -1388,6 +1432,127 @@ button, input, select, textarea {
   padding: 0.35rem 0.65rem;
   margin-bottom: 0.65rem;
   border: 1px dashed rgba(11, 107, 46, 0.2);
+}
+
+.join-collectors-section {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 0.85rem 0.95rem;
+  margin-bottom: 0;
+}
+
+.join-collectors-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--dark-green);
+  margin-bottom: 0.65rem;
+}
+
+.join-collectors-count-badge {
+  background: var(--light-green);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 107, 46, 0.18);
+}
+
+.join-collectors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-height: 390px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.join-collectors-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.join-collectors-list::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 999px;
+}
+
+.join-collector-row {
+  background: var(--white);
+  border: 1px solid rgba(11, 107, 46, 0.12);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.join-collector-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.83rem;
+}
+
+.join-collector-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.join-collector-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--light-green);
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.join-collector-role {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.join-collector-role.member {
+  background: #EFF6FF;
+  color: #1D4ED8;
+}
+
+.join-collector-total {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--dark-green);
+  white-space: nowrap;
+}
+
+.join-collector-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding-left: 1.7rem;
+}
+
+.join-collector-item-pill {
+  font-size: 0.74rem;
+  background: var(--light-green-subtle);
+  color: var(--text-main);
+  border: 1px solid rgba(11, 107, 46, 0.15);
+  border-radius: 6px;
+  padding: 0.15rem 0.45rem;
 }
 
 /* ==========================================================================
@@ -3216,6 +3381,16 @@ button, input, select, textarea {
   }
   .roadmap-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .join-modal-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .join-collectors-list {
+    max-height: 220px;
   }
 }
 
