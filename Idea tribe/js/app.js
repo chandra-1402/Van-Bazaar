@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const drawerMemberName = document.getElementById('drawerMemberName');
   const btnDrawerBankAccount = document.getElementById('btnDrawerBankAccount');
   const drawerBankStatus = document.getElementById('drawerBankStatus');
-  const btnDrawerLeaderAccess = document.getElementById('btnDrawerLeaderAccess');
   const btnDrawerLanguage = document.getElementById('btnDrawerLanguage');
 
   // MSP & Search Elements
@@ -636,17 +635,10 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', closeLeftDrawer);
   });
 
-  if (btnDrawerLeaderAccess) {
-    btnDrawerLeaderAccess.addEventListener('click', () => {
-      closeLeftDrawer();
-      if (btnLeaderAccess) btnLeaderAccess.click();
-    });
-  }
-
   if (btnDrawerLanguage) {
     btnDrawerLanguage.addEventListener('click', () => {
       closeLeftDrawer();
-      if (btnLangSelect) btnLangSelect.click();
+      if (langModal) langModal.classList.add('active');
     });
   }
 
