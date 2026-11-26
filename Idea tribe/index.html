@@ -20,42 +20,44 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B6B2E'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12c0 3.5 1.8 6.6 4.6 8.4L12 22l5.4-1.6C20.2 18.6 22 15.5 22 12c0-5.5-4.5-10-10-10zm0 17.5l-4-1.2C5.8 17 4.5 14.6 4.5 12c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5c0 2.6-1.3 5-3.5 6.3l-4 1.2z'/%3E%3Cpath d='M12 6c-3.3 0-6 2.7-6 6 0 2.2 1.2 4.1 3 5.1V12h6v5.1c1.8-1 3-2.9 3-5.1 0-3.3-2.7-6-6-6z'/%3E%3C/svg%3E">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20261126_11">
+  <link rel="stylesheet" href="css/style.css?v=20261126_14">
 </head>
 <body>
 
   <!-- ==========================================================================
-       1. Sticky Navigation
+       1. Sticky Navigation & Top-Left 3-Line Drawer Menu
        ========================================================================== -->
   <header class="navbar-wrapper" id="navbarWrapper">
     <div class="container">
       <nav class="navbar" aria-label="Main Navigation">
-        <!-- Logo Left -->
-        <a href="#home" class="brand-logo" id="brandLogo">
-          <div class="brand-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        <!-- Left: 3-Line Menu Trigger + Brand Logo -->
+        <div class="nav-left">
+          <button type="button" class="left-menu-toggle" id="btnLeftDrawerToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="leftNavDrawer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
-          </div>
-          <div class="brand-text">
-            <span class="brand-name">VAN BAZAAR</span>
-            <span class="brand-tag">वन बाज़ार • Tribal Wealth</span>
-          </div>
-        </a>
+          </button>
 
-        <!-- Menu Links -->
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="#home" class="nav-link active" id="navLinkHome">Home</a></li>
-          <li><a href="#prices" class="nav-link" id="navLinkPrices">Prices</a></li>
-          <li><a href="#services" class="nav-link" id="navLinkServices">Sell Together</a></li>
-          <li><a href="#contact" class="nav-link" id="navLinkContact">Contact</a></li>
-        </ul>
+          <a href="#home" class="brand-logo" id="brandLogo">
+            <div class="brand-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">VAN BAZAAR</span>
+              <span class="brand-tag">वन बाज़ार • Tribal Wealth</span>
+            </div>
+          </a>
+        </div>
 
-        <!-- Right Action Buttons -->
+        <!-- Right Compact Action Buttons -->
         <div class="nav-actions">
           <button class="btn btn-leader btn-sm" id="btnLeaderAccess" aria-label="Open Leader Access Dashboard">
-            <span>👑 Leader Access</span>
+            <span>👑 Leader<span class="hide-mobile-text"> Access</span></span>
           </button>
 
           <button class="btn btn-outline btn-sm" id="btnLangSelect" aria-label="Select Local Language">
@@ -65,15 +67,6 @@
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
             <span id="currentLangLabel">Local Language</span>
-          </button>
-
-          <button class="btn btn-primary btn-sm" id="btnLogin" aria-label="Login to Platform">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-              <polyline points="10 17 15 12 10 7"/>
-              <line x1="15" y1="12" x2="3" y2="12"/>
-            </svg>
-            <span>Login</span>
           </button>
 
           <!-- Logged-in User Profile Dropdown Pill -->
@@ -89,19 +82,85 @@
               </svg>
             </button>
           </div>
-
-          <!-- Mobile Hamburger Toggle -->
-          <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-          </button>
         </div>
       </nav>
     </div>
   </header>
+
+  <!-- Slide-out Left Navigation Drawer -->
+  <div class="left-drawer-backdrop" id="leftNavBackdrop"></div>
+  <aside class="left-nav-drawer" id="leftNavDrawer" aria-label="Sidebar Navigation" aria-hidden="true">
+    <div class="left-drawer-header">
+      <div class="brand-logo" style="pointer-events: none;">
+        <div class="brand-icon" style="width: 36px; height: 36px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name" style="font-size: 1.15rem;">VAN BAZAAR</span>
+          <span class="brand-tag" style="font-size: 0.6rem;">Navigation &amp; Banking</span>
+        </div>
+      </div>
+      <button type="button" class="btn-close-modal" id="btnCloseLeftDrawer" aria-label="Close navigation menu">&times;</button>
+    </div>
+
+    <div class="left-drawer-body">
+      <div class="drawer-section-label">Navigation</div>
+      <ul class="nav-menu drawer-nav-list" id="navMenu">
+        <li><a href="#home" class="nav-link drawer-nav-item active" id="navLinkHome">🏠 <span>Home</span></a></li>
+        <li><a href="#prices" class="nav-link drawer-nav-item" id="navLinkPrices">📊 <span>Prices</span></a></li>
+        <li><a href="#services" class="nav-link drawer-nav-item" id="navLinkServices">🤝 <span>Sell Together</span></a></li>
+        <li><a href="#contact" class="nav-link drawer-nav-item" id="navLinkContact">📞 <span>Contact</span></a></li>
+      </ul>
+
+      <div class="drawer-divider"></div>
+      <div class="drawer-section-label">Account &amp; Direct Credit</div>
+
+      <div class="drawer-actions-stack">
+        <button type="button" class="drawer-action-btn drawer-login-btn" id="btnLogin" aria-label="Login to Platform">
+          <span class="drawer-action-icon">🔐</span>
+          <span class="drawer-action-text">
+            <strong>Login</strong>
+            <small>OTP or Voice Verification</small>
+          </span>
+        </button>
+
+        <button type="button" class="drawer-action-btn drawer-portal-btn" id="btnDrawerMemberPortal" style="display: none;">
+          <span class="drawer-action-icon">👤</span>
+          <span class="drawer-action-text">
+            <strong id="drawerMemberName">My Member Portal</strong>
+            <small>View DBT Passbook &amp; Batches</small>
+          </span>
+        </button>
+
+        <button type="button" class="drawer-action-btn drawer-bank-btn" id="btnDrawerBankAccount">
+          <span class="drawer-action-icon">🏦</span>
+          <span class="drawer-action-text">
+            <strong>Add Bank Account</strong>
+            <small id="drawerBankStatus">Receive direct DBT credit payments</small>
+          </span>
+        </button>
+
+        <button type="button" class="drawer-action-btn" id="btnDrawerLeaderAccess">
+          <span class="drawer-action-icon">👑</span>
+          <span class="drawer-action-text">
+            <strong>Leader Access</strong>
+            <small>Van Kendra &amp; Nodal Portal</small>
+          </span>
+        </button>
+
+        <button type="button" class="drawer-action-btn" id="btnDrawerLanguage">
+          <span class="drawer-action-icon">🌐</span>
+          <span class="drawer-action-text">
+            <strong>Local Language</strong>
+            <small>Hindi, English, Santhali, Mundari, Ho</small>
+          </span>
+        </button>
+      </div>
+    </div>
+  </aside>
 
   <!-- ==========================================================================
        2. Hero Section
@@ -1163,6 +1222,17 @@
           </div>
         </div>
 
+        <!-- Member Bank Account Status Strip -->
+        <div class="member-bank-strip" id="memberBankStrip">
+          <div>
+            <strong style="font-size: 0.84rem; color: var(--dark-green); display: block;">🏦 Direct Bank Credit (DBT)</strong>
+            <span id="memberBankStatusText" style="font-size: 0.78rem; color: var(--text-muted);">No bank account linked yet</span>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" id="btnMemberBankAccount" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
+            Add / Edit Bank
+          </button>
+        </div>
+
         <!-- Action Shortcuts -->
         <div class="member-actions-grid">
           <button type="button" class="btn btn-outline btn-sm" id="btnMemberStartGroup" style="font-size: 0.85rem;">
@@ -1482,6 +1552,100 @@
     </div>
   </div>
 
+  <!-- 8. Add Bank Account Modal (Direct DBT Credit Payments) -->
+  <div class="modal-overlay" id="bankAccountModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>
+          <span style="font-size: 1.35rem;">🏦</span>
+          <span>Add Bank Account (बैंक खाता जोड़ें)</span>
+        </h3>
+        <button class="btn-close-modal" id="btnCloseBankModal" aria-label="Close Bank Account Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="bank-info-banner">
+          <span>💳</span>
+          <p>Add your bank details so all MSP produce sales and collective bonus credit payments go directly into your bank account via DBT.</p>
+        </div>
+
+        <!-- Saved Bank Account Summary Card (shown once saved) -->
+        <div class="saved-bank-card" id="savedBankSummaryCard" style="display: none;">
+          <div class="saved-bank-top">
+            <div>
+              <span class="saved-bank-badge">🟢 Active Direct Credit Account</span>
+              <h4 id="savedBankTitle" style="color: var(--dark-green); margin-top: 0.25rem;">State Bank of India</h4>
+              <p id="savedBankMeta" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">A/C: ••••1234 • IFSC: SBIN0001234</p>
+              <p id="savedBankHolder" style="font-size: 0.8rem; color: var(--text-light); margin-top: 2px;">Holder: —</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="btnRemoveBankAccount" style="border-color: #FCA5A5; color: #DC2626; font-size: 0.76rem; padding: 0.3rem 0.65rem;">
+              Remove
+            </button>
+          </div>
+        </div>
+
+        <form id="bankAccountForm">
+          <div class="calc-field-group" style="margin-bottom: 0.85rem;">
+            <label class="calc-label" for="bankHolderName">Account Holder Name (खाताधारक का नाम) *</label>
+            <input type="text" class="calc-input" id="bankHolderName" placeholder="e.g. Sunita Munda" required>
+          </div>
+
+          <div class="form-row-2" style="margin-bottom: 0.85rem;">
+            <div class="form-group-item">
+              <label for="bankName">Bank Name (बैंक का नाम) *</label>
+              <select class="form-input-control" id="bankName" required>
+                <option value="State Bank of India (SBI)">State Bank of India (SBI)</option>
+                <option value="Jharkhand Rajya Gramin Bank (JRGB)">Jharkhand Rajya Gramin Bank (JRGB)</option>
+                <option value="Bank of India (BOI)">Bank of India (BOI)</option>
+                <option value="Punjab National Bank (PNB)">Punjab National Bank (PNB)</option>
+                <option value="Bank of Baroda">Bank of Baroda</option>
+                <option value="Canara Bank">Canara Bank</option>
+                <option value="Union Bank of India">Union Bank of India</option>
+                <option value="India Post Payments Bank (IPPB)">India Post Payments Bank (IPPB)</option>
+                <option value="HDFC Bank">HDFC Bank</option>
+                <option value="ICICI Bank">ICICI Bank</option>
+                <option value="Other Bank">Other Bank</option>
+              </select>
+            </div>
+            <div class="form-group-item">
+              <label for="bankAccountType">Account Type (खाता प्रकार)</label>
+              <select class="form-input-control" id="bankAccountType">
+                <option value="Savings Account">Savings Account (बचत)</option>
+                <option value="Jan Dhan (PMJDY)">Jan Dhan (PMJDY)</option>
+                <option value="SHG Joint Account">SHG Joint Account</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2" style="margin-bottom: 0.85rem;">
+            <div class="form-group-item">
+              <label for="bankAccountNumber">Account Number (खाता संख्या) *</label>
+              <input type="text" class="form-input-control" id="bankAccountNumber" placeholder="9 to 18 digits" inputmode="numeric" maxlength="18" required>
+            </div>
+            <div class="form-group-item">
+              <label for="bankConfirmAccountNumber">Confirm Account No. *</label>
+              <input type="text" class="form-input-control" id="bankConfirmAccountNumber" placeholder="Re-enter account no." inputmode="numeric" maxlength="18" required>
+            </div>
+          </div>
+
+          <div class="form-row-2" style="margin-bottom: 1rem;">
+            <div class="form-group-item">
+              <label for="bankIfscCode">IFSC Code (आईएफएससी कोड) *</label>
+              <input type="text" class="form-input-control" id="bankIfscCode" placeholder="e.g. SBIN0001234" maxlength="11" style="text-transform: uppercase;" required>
+            </div>
+            <div class="form-group-item">
+              <label for="bankUpiId">UPI ID (Optional)</label>
+              <input type="text" class="form-input-control" id="bankUpiId" placeholder="e.g. sunita@sbi">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" id="btnSaveBankAccount" style="width: 100%;">
+            <span>💾 Save Bank Account for Direct Credit</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Component -->
   <div class="toast-msg" id="toastMsg" role="status" aria-live="polite">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);">
@@ -1496,7 +1660,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js?v=20261026_1"></script>
   <!-- App Scripts -->
-  <script src="js/data.js?v=20261126_9"></script>
-  <script src="js/app.js?v=20261126_9"></script>
+  <script src="js/data.js?v=20261126_13"></script>
+  <script src="js/app.js?v=20261126_13"></script>
 </body>
 </html>

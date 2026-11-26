@@ -7,8 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- DOM Elements ---
   const navbarWrapper = document.getElementById('navbarWrapper');
   const navLinks = document.querySelectorAll('.nav-link');
-  const mobileToggle = document.getElementById('mobileToggle');
-  const navMenu = document.getElementById('navMenu');
+  const btnLeftDrawerToggle = document.getElementById('btnLeftDrawerToggle');
+  const btnCloseLeftDrawer = document.getElementById('btnCloseLeftDrawer');
+  const leftNavDrawer = document.getElementById('leftNavDrawer');
+  const leftNavBackdrop = document.getElementById('leftNavBackdrop');
+  const btnDrawerMemberPortal = document.getElementById('btnDrawerMemberPortal');
+  const drawerMemberName = document.getElementById('drawerMemberName');
+  const btnDrawerBankAccount = document.getElementById('btnDrawerBankAccount');
+  const drawerBankStatus = document.getElementById('drawerBankStatus');
+  const btnDrawerLeaderAccess = document.getElementById('btnDrawerLeaderAccess');
+  const btnDrawerLanguage = document.getElementById('btnDrawerLanguage');
 
   // MSP & Search Elements
   const productsGrid = document.getElementById('productsGrid');
@@ -194,7 +202,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnMemberRaiseGrievance = document.getElementById('btnMemberRaiseGrievance');
   const btnMemberLeaderDesk = document.getElementById('btnMemberLeaderDesk');
   const btnMemberSupportDesk = document.getElementById('btnMemberSupportDesk');
+  const btnMemberBankAccount = document.getElementById('btnMemberBankAccount');
+  const memberBankStatusText = document.getElementById('memberBankStatusText');
   const btnLogoutUser = document.getElementById('btnLogoutUser');
+
+  // Bank Account Modal Elements
+  const bankAccountModal = document.getElementById('bankAccountModal');
+  const btnCloseBankModal = document.getElementById('btnCloseBankModal');
+  const bankAccountForm = document.getElementById('bankAccountForm');
+  const savedBankSummaryCard = document.getElementById('savedBankSummaryCard');
+  const savedBankTitle = document.getElementById('savedBankTitle');
+  const savedBankMeta = document.getElementById('savedBankMeta');
+  const savedBankHolder = document.getElementById('savedBankHolder');
+  const btnRemoveBankAccount = document.getElementById('btnRemoveBankAccount');
+  const bankHolderName = document.getElementById('bankHolderName');
+  const bankName = document.getElementById('bankName');
+  const bankAccountType = document.getElementById('bankAccountType');
+  const bankAccountNumber = document.getElementById('bankAccountNumber');
+  const bankConfirmAccountNumber = document.getElementById('bankConfirmAccountNumber');
+  const bankIfscCode = document.getElementById('bankIfscCode');
+  const bankUpiId = document.getElementById('bankUpiId');
 
   // Footer Shortcuts
   const footerBtnVoice = document.getElementById('footerBtnVoice');
@@ -572,15 +599,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', handleScroll, { passive: true });
 
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-    });
+  const openLeftDrawer = () => {
+    if (leftNavDrawer) {
+      leftNavDrawer.classList.add('open');
+      leftNavDrawer.setAttribute('aria-hidden', 'false');
+    }
+    if (leftNavBackdrop) leftNavBackdrop.classList.add('open');
+    if (btnLeftDrawerToggle) btnLeftDrawerToggle.setAttribute('aria-expanded', 'true');
+  };
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-      });
+  const closeLeftDrawer = () => {
+    if (leftNavDrawer) {
+      leftNavDrawer.classList.remove('open');
+      leftNavDrawer.setAttribute('aria-hidden', 'true');
+    }
+    if (leftNavBackdrop) leftNavBackdrop.classList.remove('open');
+    if (btnLeftDrawerToggle) btnLeftDrawerToggle.setAttribute('aria-expanded', 'false');
+  };
+
+  if (btnLeftDrawerToggle) {
+    btnLeftDrawerToggle.addEventListener('click', () => {
+      const isOpen = leftNavDrawer && leftNavDrawer.classList.contains('open');
+      if (isOpen) closeLeftDrawer();
+      else openLeftDrawer();
+    });
+  }
+
+  if (btnCloseLeftDrawer) {
+    btnCloseLeftDrawer.addEventListener('click', closeLeftDrawer);
+  }
+  if (leftNavBackdrop) {
+    leftNavBackdrop.addEventListener('click', closeLeftDrawer);
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeLeftDrawer);
+  });
+
+  if (btnDrawerLeaderAccess) {
+    btnDrawerLeaderAccess.addEventListener('click', () => {
+      closeLeftDrawer();
+      if (btnLeaderAccess) btnLeaderAccess.click();
+    });
+  }
+
+  if (btnDrawerLanguage) {
+    btnDrawerLanguage.addEventListener('click', () => {
+      closeLeftDrawer();
+      if (btnLangSelect) btnLangSelect.click();
+    });
+  }
+
+  if (btnDrawerMemberPortal) {
+    btnDrawerMemberPortal.addEventListener('click', () => {
+      closeLeftDrawer();
+      if (userMemberModal) userMemberModal.classList.add('active');
     });
   }
 
@@ -2467,12 +2540,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnHeroListenVoice = document.getElementById('btnHeroListenVoice');
     const mspSectionTitle = document.getElementById('mspSectionTitle');
 
+    const setNavLabel = (el, text) => {
+      if (!el || !text) return;
+      const span = el.querySelector('span');
+      if (span) span.textContent = text;
+      else el.textContent = text;
+    };
+
     if (currentLangLabel) currentLangLabel.textContent = dict.name ? dict.name.split(' ')[0] : 'Language';
-    if (navLinkHome) navLinkHome.textContent = dict.navHome;
-    if (navLinkPrices) navLinkPrices.textContent = dict.navPrices;
-    if (navLinkServices) navLinkServices.textContent = dict.navSell;
-    if (navLinkImpact) navLinkImpact.textContent = dict.navImpact;
-    if (navLinkContact) navLinkContact.textContent = dict.navContact;
+    setNavLabel(navLinkHome, dict.navHome);
+    setNavLabel(navLinkPrices, dict.navPrices);
+    setNavLabel(navLinkServices, dict.navSell);
+    setNavLabel(navLinkImpact, dict.navImpact);
+    setNavLabel(navLinkContact, dict.navContact);
     if (heroSubtitle) heroSubtitle.textContent = dict.heroSubtitle;
     if (heroDesc) heroDesc.textContent = dict.heroDesc;
     if (btnHeroGetStarted && btnHeroGetStarted.querySelector('span') && dict.btnGetStarted) {
@@ -2521,6 +2601,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (e) {}
 
       if (btnLogin) btnLogin.style.display = 'none';
+      if (btnDrawerMemberPortal) btnDrawerMemberPortal.style.display = 'flex';
+      if (drawerMemberName) drawerMemberName.textContent = user.name.split(' ')[0] + "'s Portal";
       if (userProfileMenuWrap) userProfileMenuWrap.style.display = 'inline-flex';
 
       const initials = user.initials || user.name.split(' ').map(w => w[0]).filter(c => /[A-Za-z]/.test(c)).slice(0, 2).join('').toUpperCase() || 'SM';
@@ -2549,8 +2631,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (btnLeaderAccess) {
         btnLeaderAccess.innerHTML = userIsLeader 
-          ? '<span>👑 Leader Access <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22C55E; margin-left:4px;" title="Verified Leader Session"></span></span>' 
-          : '<span>👑 Leader Access</span>';
+          ? '<span>👑 Leader<span class="hide-mobile-text"> Access</span> <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22C55E; margin-left:4px;" title="Verified Leader Session"></span></span>' 
+          : '<span>👑 Leader<span class="hide-mobile-text"> Access</span></span>';
       }
 
     } else {
@@ -2559,12 +2641,13 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('van_bazaar_logged_user');
       } catch (e) {}
 
-      if (btnLogin) btnLogin.style.display = 'inline-flex';
+      if (btnLogin) btnLogin.style.display = 'flex';
+      if (btnDrawerMemberPortal) btnDrawerMemberPortal.style.display = 'none';
       if (userProfileMenuWrap) userProfileMenuWrap.style.display = 'none';
 
       if (btnMemberLeaderDesk) btnMemberLeaderDesk.style.display = 'none';
       if (btnMemberSupportDesk) btnMemberSupportDesk.style.display = 'block';
-      if (btnLeaderAccess) btnLeaderAccess.innerHTML = '<span>👑 Leader Access</span>';
+      if (btnLeaderAccess) btnLeaderAccess.innerHTML = '<span>👑 Leader<span class="hide-mobile-text"> Access</span></span>';
     }
   };
 
@@ -2743,6 +2826,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Open Login Modal
   if (btnLogin) {
     btnLogin.addEventListener('click', () => {
+      closeLeftDrawer();
       showLoginStep1();
       loginModal.classList.add('active');
     });
@@ -3238,7 +3322,178 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
   }
 
+  // ==========================================================================
+  // 8B. Add Bank Account (Direct DBT Credit Payments)
+  // ==========================================================================
+  let savedBankAccount = null;
+  try {
+    const rawBank = localStorage.getItem('van_bazaar_bank_account');
+    savedBankAccount = rawBank ? JSON.parse(rawBank) : null;
+  } catch (e) {
+    savedBankAccount = null;
+  }
+
+  const maskAccountNumber = (accNo = '') => {
+    const clean = String(accNo).replace(/\s+/g, '');
+    if (clean.length <= 4) return clean;
+    return '••••' + clean.slice(-4);
+  };
+
+  const renderBankAccountUI = () => {
+    if (savedBankAccount && savedBankAccount.accountNumber) {
+      const masked = maskAccountNumber(savedBankAccount.accountNumber);
+      if (drawerBankStatus) {
+        drawerBankStatus.textContent = `✓ ${savedBankAccount.bankName} (${masked})`;
+      }
+      if (memberBankStatusText) {
+        memberBankStatusText.textContent = `✓ ${savedBankAccount.bankName} (${masked}) • IFSC ${savedBankAccount.ifsc}`;
+      }
+      if (btnMemberBankAccount) {
+        btnMemberBankAccount.textContent = 'Edit Bank';
+      }
+      if (savedBankSummaryCard) savedBankSummaryCard.style.display = 'block';
+      if (savedBankTitle) savedBankTitle.textContent = savedBankAccount.bankName;
+      if (savedBankMeta) {
+        savedBankMeta.textContent = `A/C: ${masked} (${savedBankAccount.accountType || 'Savings'}) • IFSC: ${savedBankAccount.ifsc}`;
+      }
+      if (savedBankHolder) {
+        savedBankHolder.textContent = `Holder: ${savedBankAccount.holderName}${savedBankAccount.upi ? ' • UPI: ' + savedBankAccount.upi : ''}`;
+      }
+    } else {
+      if (drawerBankStatus) drawerBankStatus.textContent = 'Receive direct DBT credit payments';
+      if (memberBankStatusText) memberBankStatusText.textContent = 'No bank account linked yet';
+      if (btnMemberBankAccount) btnMemberBankAccount.textContent = 'Add / Edit Bank';
+      if (savedBankSummaryCard) savedBankSummaryCard.style.display = 'none';
+    }
+  };
+
+  const openBankAccountModal = () => {
+    renderBankAccountUI();
+    if (savedBankAccount) {
+      if (bankHolderName) bankHolderName.value = savedBankAccount.holderName || '';
+      if (bankName) bankName.value = savedBankAccount.bankName || 'State Bank of India (SBI)';
+      if (bankAccountType) bankAccountType.value = savedBankAccount.accountType || 'Savings Account';
+      if (bankAccountNumber) bankAccountNumber.value = savedBankAccount.accountNumber || '';
+      if (bankConfirmAccountNumber) bankConfirmAccountNumber.value = savedBankAccount.accountNumber || '';
+      if (bankIfscCode) bankIfscCode.value = savedBankAccount.ifsc || '';
+      if (bankUpiId) bankUpiId.value = savedBankAccount.upi || '';
+    } else {
+      if (bankHolderName) {
+        bankHolderName.value = (currentLoggedUser && currentLoggedUser.name) ? currentLoggedUser.name : '';
+      }
+      if (bankAccountNumber) bankAccountNumber.value = '';
+      if (bankConfirmAccountNumber) bankConfirmAccountNumber.value = '';
+      if (bankIfscCode) bankIfscCode.value = '';
+      if (bankUpiId) bankUpiId.value = '';
+    }
+    if (bankAccountModal) bankAccountModal.classList.add('active');
+  };
+
+  if (btnDrawerBankAccount) {
+    btnDrawerBankAccount.addEventListener('click', () => {
+      closeLeftDrawer();
+      openBankAccountModal();
+    });
+  }
+
+  if (btnMemberBankAccount) {
+    btnMemberBankAccount.addEventListener('click', () => {
+      if (userMemberModal) userMemberModal.classList.remove('active');
+      openBankAccountModal();
+    });
+  }
+
+  if (btnCloseBankModal && bankAccountModal) {
+    btnCloseBankModal.addEventListener('click', () => {
+      bankAccountModal.classList.remove('active');
+    });
+  }
+
+  if (btnRemoveBankAccount) {
+    btnRemoveBankAccount.addEventListener('click', () => {
+      savedBankAccount = null;
+      try {
+        localStorage.removeItem('van_bazaar_bank_account');
+      } catch (e) {}
+      if (bankAccountForm) bankAccountForm.reset();
+      renderBankAccountUI();
+      showToast('Bank account removed.');
+    });
+  }
+
+  if (bankAccountNumber) {
+    bankAccountNumber.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+  }
+  if (bankConfirmAccountNumber) {
+    bankConfirmAccountNumber.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+  }
+  if (bankIfscCode) {
+    bankIfscCode.addEventListener('input', (e) => {
+      e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 11);
+    });
+  }
+
+  if (bankAccountForm) {
+    bankAccountForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const holder = bankHolderName ? bankHolderName.value.trim() : '';
+      const bank = bankName ? bankName.value : '';
+      const accType = bankAccountType ? bankAccountType.value : 'Savings Account';
+      const accNo = bankAccountNumber ? bankAccountNumber.value.replace(/\s+/g, '') : '';
+      const accConfirm = bankConfirmAccountNumber ? bankConfirmAccountNumber.value.replace(/\s+/g, '') : '';
+      const ifsc = bankIfscCode ? bankIfscCode.value.trim().toUpperCase() : '';
+      const upi = bankUpiId ? bankUpiId.value.trim() : '';
+
+      if (!holder) {
+        showToast('⚠️ Please enter the account holder name.');
+        return;
+      }
+      if (accNo.length < 9 || accNo.length > 18) {
+        showToast('⚠️ Please enter a valid 9 to 18 digit bank account number.');
+        if (bankAccountNumber) bankAccountNumber.focus();
+        return;
+      }
+      if (accNo !== accConfirm) {
+        showToast('⚠️ Account numbers do not match. Please re-enter.');
+        if (bankConfirmAccountNumber) bankConfirmAccountNumber.focus();
+        return;
+      }
+      if (!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc)) {
+        showToast('⚠️ Please enter a valid 11-character IFSC code (e.g. SBIN0001234).');
+        if (bankIfscCode) bankIfscCode.focus();
+        return;
+      }
+
+      savedBankAccount = {
+        holderName: holder,
+        bankName: bank,
+        accountType: accType,
+        accountNumber: accNo,
+        ifsc: ifsc,
+        upi: upi,
+        updatedAt: new Date().toISOString()
+      };
+
+      try {
+        localStorage.setItem('van_bazaar_bank_account', JSON.stringify(savedBankAccount));
+      } catch (err) {}
+
+      renderBankAccountUI();
+      if (bankAccountModal) bankAccountModal.classList.remove('active');
+      speakText(
+        `${holder} जी, आपका बैंक खाता जुड़ गया है। अब सभी भुगतान सीधे आपके बैंक खाते में आएंगे।`,
+        `${holder} ji, aapka bank account jud gaya hai. Ab sabhi credit payments seedhe aapke bank mein aayenge.`
+      );
+      showToast(`🏦 Bank account linked (${bank} ${maskAccountNumber(accNo)})! Direct DBT credit enabled.`);
+    });
+  }
+
   // Initial Initialization
+  renderBankAccountUI();
   renderProducts();
   renderCollectiveListings();
   updateFormEstimate();
